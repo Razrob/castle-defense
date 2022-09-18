@@ -55,5 +55,7 @@ public class CycleFrameworkBootloader : MonoBehaviour
         cycleEventsTransmitter.transform.SetSiblingIndex(0);
 
         cycleEventsTransmitter.Init(_cycleStateMachine, _cycleEventsProcessor);
+
+        new FrameworkCommander(_cycleStateMachine);
     }
 }
