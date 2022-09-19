@@ -8,6 +8,8 @@ public class FrameworkCommander
 
     private Action<CycleState> _onStateChange;
 
+    public static GlobalData GlobalData => _instance._globalData;
+
     public static event Action<CycleState> OnStateChange
     {
         add => _instance._onStateChange += value;
