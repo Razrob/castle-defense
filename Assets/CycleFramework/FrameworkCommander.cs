@@ -2,7 +2,7 @@
 
 public class FrameworkCommander
 {
-    private static readonly FrameworkCommander _instance;
+    private static FrameworkCommander _instance;
     private readonly CycleStateMachine _cycleStateMachine;
     private readonly GlobalData _globalData;
 
@@ -18,6 +18,7 @@ public class FrameworkCommander
 
     public FrameworkCommander(CycleStateMachine cycleStateMachine)
     {
+        _instance = this;
         _cycleStateMachine = cycleStateMachine;
         _globalData = SerializeExtensions.Deserialize<GlobalData>() ?? new GlobalData();
     }

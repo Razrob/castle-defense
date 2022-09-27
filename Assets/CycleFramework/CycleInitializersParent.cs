@@ -15,10 +15,8 @@ public class CycleInitializersParent : MonoBehaviour
 
     private void OnEnable()
     {
+        InitInitializers();
         TryInitHierarсhy();
-
-        if (Application.isPlaying)
-            InitInitializers();
     }
 
     private void OnTransformChildrenChanged() => TryInitHierarсhy();
