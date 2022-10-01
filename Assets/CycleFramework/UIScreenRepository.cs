@@ -20,8 +20,8 @@ public class UIScreenRepository : MonoBehaviour
         _instance = this;
         _screens = new Dictionary<Type, UIScreen>();
 
-        foreach(UIScreen screen in FindObjectsOfType<UIScreen>(true))
-            _screens.Add(screen.GetType(), screen);
+        foreach (UIScreen screen in FindObjectsOfType<UIScreen>(true))
+            _screens.Add(screen.GetType(), screen); 
     }
 
     public static TScreen GetScreen<TScreen>() where TScreen : UIScreen
