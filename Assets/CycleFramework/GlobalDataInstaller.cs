@@ -4,6 +4,6 @@ public class GlobalDataInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
-        Container.BindInstance(FrameworkCommander.GlobalData);
+        //Container.BindInstance(FWC.GlobalData);
     }
 }

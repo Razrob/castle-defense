@@ -1,8 +1,8 @@
 ﻿using System;
 
-public class FrameworkCommander
+public class FWC
 {
-    private static FrameworkCommander _instance;
+    private static FWC _instance;
     private readonly CycleStateMachine _cycleStateMachine;
     private readonly GlobalData _globalData;
 
@@ -16,7 +16,7 @@ public class FrameworkCommander
         remove => _instance._onStateChange -= value;
     }
 
-    public FrameworkCommander(CycleStateMachine cycleStateMachine)
+    public FWC(CycleStateMachine cycleStateMachine)
     {
         _instance = this;
         _cycleStateMachine = cycleStateMachine;

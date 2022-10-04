@@ -35,13 +35,13 @@ public class JoystickOffcetTransmitter : CycleInitializerBase
         else 
             _screen.Stick.position = _stickPivot + (eventData.position - _stickPivot).normalized * _maxStickDistance;
 
-        FrameworkCommander.GlobalData.UserInput.JoystickOffcet = Offcet;
+        FWC.GlobalData.UserInput.JoystickOffcet = Offcet;
     }
 
     private void OnJoystickDisable(PointerEventData eventData)
     {
         _screen.Stick.gameObject.SetActive(false);
         _screen.StickArea.gameObject.SetActive(false);
-       FrameworkCommander.GlobalData.UserInput.JoystickOffcet = Vector2.zero;
+       FWC.GlobalData.UserInput.JoystickOffcet = Vector2.zero;
     }
 }

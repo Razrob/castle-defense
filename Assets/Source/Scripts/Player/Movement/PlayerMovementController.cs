@@ -11,7 +11,7 @@ public class PlayerMovementController : CycleInitializerBase
 
     protected override void OnInit() 
     {
-        FrameworkCommander.GlobalData.PlayerData.Player = FindObjectOfType<Player>();
+        FWC.GlobalData.PlayerData.Player = FindObjectOfType<Player>();
     }
 
     private void Awake()

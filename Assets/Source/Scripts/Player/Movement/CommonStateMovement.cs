@@ -4,8 +4,8 @@ public class CommonStateMovement: IMovementState
 {
     public void Move(Movement movement)
     {
-        UserInput userInput = FrameworkCommander.GlobalData.UserInput;
-        PlayerData playerData = FrameworkCommander.GlobalData.PlayerData;
+        UserInput userInput = FWC.GlobalData.UserInput;
+        PlayerData playerData = FWC.GlobalData.PlayerData;
         CharacterController characterController = playerData.Player.CharacterController;
 
         Vector3 direction = userInput.CalculateWorldDirection(movement.Camera).normalized;

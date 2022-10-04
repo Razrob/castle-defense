@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c276589e4b1028448a4c7a8b7aed67af, type: 3}
+  m_Name: DefenceWallsConfig
+  m_EditorClassIdentifier: 
+  _defaultWall:
+    ConstructionPrefab: {fileID: -2186876324964033769, guid: d3e514618c943ed44bb4700058efa6f0, type: 3}
+    SkinPrefab: {fileID: 6104251608892908802, guid: 96cbddff5e1b76943b66ebc321d531ab, type: 3}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
+  _defenceWallsPrefabs:
+  - ConstructionPrefab: {fileID: -2186876324964033769, guid: d3e514618c943ed44bb4700058efa6f0, type: 3}
+    SkinPrefab: {fileID: 6104251608892908802, guid: 96cbddff5e1b76943b66ebc321d531ab, type: 3}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
+  - ConstructionPrefab: {fileID: 6530555486081867999, guid: 628714aeee6325d4ca2b042fa5648367, type: 3}
+    SkinPrefab: {fileID: 6800622028580547213, guid: ff271b47262a9c847a574c04b1b52119, type: 3}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
+  - ConstructionPrefab: {fileID: 1610080349085036769, guid: bb210b8b88721d042968deafd965ec56, type: 3}
+    SkinPrefab: {fileID: 6093121145425728248, guid: ef3b834cd8d34e247bfba2fb0e790410, type: 3}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
+  - ConstructionPrefab: {fileID: 5125454863382846173, guid: a840dc5fff494a0459e05249aae42160, type: 3}
+    SkinPrefab: {fileID: 2785939313815404237, guid: 9890ff848c2d0d9429bb85b3b7f67f8c, type: 3}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
+  - ConstructionPrefab: {fileID: 178099790769646462, guid: 28a65416d4bb23f4f992ea75b54a66a6, type: 3}
+    SkinPrefab: {fileID: 8791261914285511847, guid: d590e7f035c9ae14db00e1fcf4b54a52, type: 3}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
+  - ConstructionPrefab: {fileID: 3864918830969172493, guid: f36add3b170baa14a8cbd229cf3ad9ca, type: 3}
+    SkinPrefab: {fileID: 8961432817229619814, guid: ffbda1107ba2d194499bf79560e9f9e8, type: 3}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
