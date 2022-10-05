@@ -20,7 +20,7 @@ public class DefenceWallTester : CycleInitializerBase
 
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out raycastHit))
             {
-                Vector3 position = FWC.GlobalData.ConstructionsRepository.RoundPositionToGrid(raycastHit.point);
+                Vector3 position = FWC.GlobalData.ConstructionsRepository.RoundPositionToGrid(raycastHit.point + Vector3.down * 1f);
 
                 if (FWC.GlobalData.ConstructionsRepository.ConstructionExist(position.ToInt()))
                     return;
