@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public Rigidbody Rigidbody;
-    public Transform Transform;
-    public CharacterController CharacterController;
+    private Rigidbody _rigidbody;
+    private Transform _transform;
+    private CharacterController _characterController;
+
+    public Rigidbody Rigidbody => _rigidbody;
+    public Transform Transform => _transform;
+    public CharacterController CharacterController => _characterController;
 
     private void Awake()
     {
-        Rigidbody = GetComponent<Rigidbody>();
-        Transform = GetComponent<Transform>();
-        CharacterController = GetComponent<CharacterController>();
+        _rigidbody = GetComponent<Rigidbody>();
+        _transform = GetComponent<Transform>();
+        _characterController = GetComponent<CharacterController>();
     }
 }
