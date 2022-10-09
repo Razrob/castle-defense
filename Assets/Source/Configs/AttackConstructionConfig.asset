@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2052c040f5e4bdc4aa4cb9d74c1b9268, type: 3}
+  m_Name: AttackConstructionConfig
+  m_EditorClassIdentifier: 
+  _attackConstructionPairs:
+  - ConstructionID: 20
+    Configuration:
+      ConstructionPrefab: {fileID: 5556265040905442284, guid: 2088f88c13a19af488b6d4eb12979c8e, type: 3}
+      SkinPrefab: {fileID: 1027402728360758852, guid: ebef833e0f7f50949912ddfd2b66ce2c, type: 3}
+      Rotation: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}

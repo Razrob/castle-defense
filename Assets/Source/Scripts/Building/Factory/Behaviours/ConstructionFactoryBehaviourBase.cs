@@ -10,5 +10,5 @@ public abstract class ConstructionFactoryBehaviourBase : MonoBehaviour
     protected virtual void OnInit() { }
 
     public abstract ConstructionType ConstructionType { get; }
-    public abstract TConstruction Create<TConstruction>() where TConstruction : ConstructionBase;
+    public abstract TConstruction Create<TConstruction>(ConstructionID constructionID) where TConstruction : ConstructionBase;
 }

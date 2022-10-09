@@ -7,6 +7,8 @@ public class GlobalData
     public PlayerData PlayerData;
     public ConstructionsRepository ConstructionsRepository;
 
+    public Pool<Projectile, ProjectileShape> ProjectilesPool;
+
     public GlobalData()
     {
         UserInput = new UserInput();

@@ -1,18 +1,13 @@
 ﻿using System;
+using Zenject;
 
 public class DefenceWallFactoryBehaviour : ConstructionFactoryBehaviourBase
 {
-    private DefenceWallsConfig _defenceWallsConfig;
+    [Inject] private readonly DefenceWallsConfig _defenceWallsConfig;
 
     public override ConstructionType ConstructionType => ConstructionType.Defence_Wall;
 
-    protected override void OnInit()
-    {
-        _defenceWallsConfig = ConfigsRepository.FindConfig<DefenceWallsConfig>() ?? 
-            throw new NullReferenceException($"{typeof(DefenceWallsConfig).Name} not found");
-    }
-
-    public override TConstruction Create<TConstruction>()
+    public override TConstruction Create<TConstruction>(ConstructionID constructionID)
     {
         ConstructionConfiguration<DefenceWallConstruction> configuration = _defenceWallsConfig.DefaultWall;
 

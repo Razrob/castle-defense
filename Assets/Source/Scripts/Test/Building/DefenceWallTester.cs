@@ -16,17 +16,18 @@ public class DefenceWallTester : CycleInitializerBase
     {
         if (Input.GetMouseButtonUp(0))
         {
-            RaycastHit raycastHit;
+            RaycastHit[] raycastHits = Physics.RaycastAll(Camera.main.ScreenPointToRay(Input.mousePosition));
+            int index = raycastHits.IndexOf(hit => !hit.collider.isTrigger);
 
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out raycastHit))
+            if (index > -1)
             {
-                Vector3 position = FWC.GlobalData.ConstructionsRepository.RoundPositionToGrid(raycastHit.point + Vector3.down * 1f);
+                Vector3 position = FWC.GlobalData.ConstructionsRepository.RoundPositionToGrid(raycastHits[index].point);
 
                 if (FWC.GlobalData.ConstructionsRepository.ConstructionExist(position.ToInt()))
                     return;
 
-                DefenceWallConstruction defenceWall = _constructionFactory.Create<DefenceWallConstruction>(ConstructionType.Defence_Wall);
-                defenceWall.transform.position = position;
+                DefenceWallConstruction defenceWall = _constructionFactory.Create<DefenceWallConstruction>(ConstructionID.Defence_Wall);
+                defenceWall.transform.position = position + Vector3.down * 1f;
 
                 FWC.GlobalData.ConstructionsRepository.AddConstruction(position.ToInt(), defenceWall);
                 _formConstructionTransformer.Refresh();

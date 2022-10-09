@@ -48,4 +48,18 @@ public static class CollectionExtensions
 
         return -1;
     }
+
+    public static TElement FindMin<TElement>(this IEnumerable<TElement> collection,  
+        Func<TElement, TElement, bool> nextElementMore)
+    {
+        TElement last = collection.FirstOrDefault();
+
+        foreach (TElement e in collection)
+        {
+            if (nextElementMore(last, e))
+                last = e;
+        }
+
+        return last;
+    }
 }

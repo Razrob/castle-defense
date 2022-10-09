@@ -8,5 +8,8 @@ public class ConfigsInstaller : MonoInstaller
     public override void InstallBindings()
     {
         Container.BindInstance(_configsRepository).AsSingle();
+
+        foreach (ISingleConfig config in _configsRepository.Configs)
+            Container.Bind(config.GetType()).FromInstance(config).AsSingle();
     }
 }

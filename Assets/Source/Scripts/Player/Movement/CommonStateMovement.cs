@@ -14,6 +14,7 @@ public class CommonStateMovement: IMovementState
         characterController.Move(offset);
         
         float joystickAngle = Mathf.Atan2(userInput.JoystickOffcet.x, userInput.JoystickOffcet.y) * 180 / Mathf.PI;
+        joystickAngle = Quaternion.LookRotation(direction, Vector3.up).eulerAngles.y;
 
         if (userInput.JoystickOffcet!=new Vector2(0,0))
             playerData.Player.Transform.rotation = Quaternion.Euler(new Vector3(0, joystickAngle, 0));

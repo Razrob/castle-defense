@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class ConstructionsRepository : IConstructionGrid
 {
-    private readonly ConstructionConfig _constructionConfig;
+    private readonly BuildingGridConfig _constructionConfig;
     private readonly Dictionary<Vector3Int, ConstructionCellData> _constructions;
 
     public IReadOnlyCollection<Vector3Int> Positions => _constructions.Keys;
 
     public ConstructionsRepository()
     {
-        _constructionConfig = ConfigsRepository.FindConfig<ConstructionConfig>() ??
+        _constructionConfig = ConfigsRepository.FindConfig<BuildingGridConfig>() ??
             throw new NullReferenceException();
 
         _constructions = new Dictionary<Vector3Int, ConstructionCellData>();
