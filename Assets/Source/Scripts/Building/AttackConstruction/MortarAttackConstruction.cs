@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class MortarAttackConstruction : AttackConstruction
 {
     [SerializeField] private MortarConstructionSkin _skin;
 
-    private const float _angle = 70f;
+    private const float _angle = 55f;
     private const float _shootDelay = 2f;
     private float _lastShootTimer;
 
@@ -45,7 +46,10 @@ public class MortarAttackConstruction : AttackConstruction
 
         projectile.Construct(typeof(IDamagable), ProjectileShape.Sphere_Shape, 50f);
         projectile.Rigidbody.position = _skin.BulletSpawnPoint.position;
-        projectile.OnCollision += p => p.LastCollisionInfo.Value.TryGetComponent<IDamagable>().TakeDamage(p);
+        projectile.OnCollision += p =>
+        {
+            p.LastCollisionInfo.Value.TryGetComponent<IDamagable>().TakeDamage(p);
+        };
 
         const float horizontalSpeed = 3f;
 

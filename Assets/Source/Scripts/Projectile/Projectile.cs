@@ -1,9 +1,12 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using UnityEngine;
+using Zenject.SpaceFighter;
 
 public class Projectile : MonoBehaviour, IPoolable<Projectile, ProjectileShape>, IPoolEventListener, IDamageApplicator
 {
     [SerializeField] private Rigidbody _rigidbody;
+    [SerializeField] private ParticleSystem _explosion;
 
     public Type CollisionMask { get; private set; }
     public ProjectileCollisionInfo? LastCollisionInfo { get; private set; }
@@ -33,8 +36,10 @@ public class Projectile : MonoBehaviour, IPoolable<Projectile, ProjectileShape>,
         Identifier = 0;
         CollisionMask = null;
         LastCollisionInfo = null;
-        gameObject.SetActive(false);
         OnCollision = null;
+        _explosion.Stop();
+
+        gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -51,6 +56,8 @@ public class Projectile : MonoBehaviour, IPoolable<Projectile, ProjectileShape>,
             CollisionComponent = component,
         };
 
+        _explosion.Play();
         OnCollision?.Invoke(this);
+        DOTween.Sequence().AppendInterval(1f).AppendCallback(() => ElementReturnEvent?.Invoke(this));
     }
 }
