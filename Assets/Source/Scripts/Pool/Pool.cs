@@ -70,8 +70,8 @@ public class Pool<TElement> where TElement : IPoolable<TElement>
 
     private void ReturnElement(TElement element)
     {
-        element.ElementReturnEvent += ReturnElement;
-        element.ElementDestroyEvent += ElementDestroy;
+        element.ElementReturnEvent -= ReturnElement;
+        element.ElementDestroyEvent -= ElementDestroy;
 
         if (!_expandable)
             _extractedElements.Remove(element);
@@ -82,8 +82,8 @@ public class Pool<TElement> where TElement : IPoolable<TElement>
 
     private void ElementDestroy(TElement element)
     {
-        element.ElementReturnEvent += ReturnElement;
-        element.ElementDestroyEvent += ElementDestroy;
+        element.ElementReturnEvent -= ReturnElement;
+        element.ElementDestroyEvent -= ElementDestroy;
 
         if (!_expandable)
             _extractedElements.Remove(element);
@@ -166,8 +166,8 @@ public class Pool<TElement, TID> where TElement : IPoolable<TElement, TID>
 
     private void ReturnElement(TElement element)
     {
-        element.ElementReturnEvent += ReturnElement;
-        element.ElementDestroyEvent += ElementDestroy;
+        element.ElementReturnEvent -= ReturnElement;
+        element.ElementDestroyEvent -= ElementDestroy;
 
         if (!_expandable)
             _extractedElements.Remove(element.Identifier);
@@ -178,8 +178,8 @@ public class Pool<TElement, TID> where TElement : IPoolable<TElement, TID>
 
     private void ElementDestroy(TElement element)
     {
-        element.ElementReturnEvent += ReturnElement;
-        element.ElementDestroyEvent += ElementDestroy;
+        element.ElementReturnEvent -= ReturnElement;
+        element.ElementDestroyEvent -= ElementDestroy;
 
         if (!_expandable)
             _extractedElements[element.Identifier].Remove(element);
