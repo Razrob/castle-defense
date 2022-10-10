@@ -58,6 +58,6 @@ public class Projectile : MonoBehaviour, IPoolable<Projectile, ProjectileShape>,
 
         _explosion.Play();
         OnCollision?.Invoke(this);
-        DOTween.Sequence().AppendInterval(1f).AppendCallback(() => ElementReturnEvent?.Invoke(this));
+        DOTween.Sequence().AppendInterval(_explosion.main.startLifetime.constant).AppendCallback(() => ElementReturnEvent?.Invoke(this));
     }
 }
