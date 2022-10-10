@@ -1,9 +1,18 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "EntityStateConfig", menuName = "Config/EntityStateConfig")]
 public class EntityStateConfig : ScriptableObject
 {
-    public enum EntityState {Move,Build,Atack};
-    public EntityState[] States;
+    [SerializeField] private EntityStateID[] _states;
+
+    public IReadOnlyList<EntityStateID> States => _states;
 }
 
+
+public enum EntityStateID
+{
+    Move,
+    Build,
+    Atack
+};
