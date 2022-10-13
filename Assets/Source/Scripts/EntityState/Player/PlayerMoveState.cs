@@ -18,7 +18,7 @@ public class PlayerMoveState : EntityStateBase
 
     public override void OnUpdate()
     {
-        _animator.SetFloat("Speed", FWC.GlobalData.UserInput.JoystickOffcet.magnitude);
+        _animator.SetFloat("Speed", FWC.GlobalData.PlayerData.Player.CharacterController.velocity.magnitude);
     }
     public override void OnStateExit()
     {

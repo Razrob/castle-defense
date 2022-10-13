@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18241845, g: 0.22813076, b: 0.30728063, a: 1}
+  m_IndirectSpecularColor: {r: 0.1824187, g: 0.22813123, b: 0.30728135, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3432,7 +3432,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1067495067
 Transform:
   m_ObjectHideFlags: 0
@@ -3500,7 +3500,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1067495066}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.35
+  m_Radius: 0.24
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -5063,6 +5063,7 @@ GameObject:
   - component: {fileID: 1726444289}
   - component: {fileID: 1726444288}
   - component: {fileID: 1726444287}
+  - component: {fileID: 1726444290}
   m_Layer: 0
   m_Name: Warrion
   m_TagString: Untagged
@@ -5077,15 +5078,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1726444285}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0.89074355, z: -0, w: 0.45450616}
+  m_LocalPosition: {x: 1.0199969, y: 0, z: 0.14734344}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 973577656}
   - {fileID: 155064903}
   m_Father: {fileID: 0}
   m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -125.934, z: 0}
 --- !u!136 &1726444287
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5138,6 +5139,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1726444290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726444285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34392bd54de84b047855688b55db5277, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _navMeshAgent: {fileID: 1726444288}
 --- !u!1001 &1757695417
 PrefabInstance:
   m_ObjectHideFlags: 0
