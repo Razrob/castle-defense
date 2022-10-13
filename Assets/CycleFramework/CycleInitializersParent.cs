@@ -13,6 +13,12 @@ public class CycleInitializersParent : MonoBehaviour
 
     public IReadOnlyDictionary<CycleState, CycleInitializersHandler> CycleInitializersHandlers { get; private set; }
 
+    private void Awake()
+    {
+        InitInitializers();
+        TryInitHierarсhy();
+    }
+
     private void OnEnable()
     {
         InitInitializers();

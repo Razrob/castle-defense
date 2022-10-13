@@ -17,8 +17,10 @@ public class CycleFrameworkBootloader : MonoBehaviour
     private void OnEnable() => TryInitHierarñhy();
     private void OnTransformChildrenChanged() => TryInitHierarñhy();
 
-    private void Start()
+    private void Awake()
     {
+        TryInitHierarñhy();
+
         if (Application.isPlaying)
             InitFramework();
     }
