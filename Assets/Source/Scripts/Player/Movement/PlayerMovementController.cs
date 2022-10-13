@@ -8,7 +8,6 @@ public class PlayerMovementController : CycleInitializerBase
 
     protected override void OnInit() 
     {
-        FWC.GlobalData.PlayerData.Player = FindObjectOfType<Player>();
         _movement = new Movement(new CommonStateMovement(), _camera, FWC.GlobalData.PlayerData.Player.Speed);
     }
 

@@ -2,33 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class EntityStatesHandler
+public enum EntityStateID
 {
-    private EntityStateID[] _entityState;
-    private EntityStateID _startEntityState;
-
-    public event Action StateOnСhanged;
-
-    public EntityStateID StartEntityState {
-        get
-        {
-            return _startEntityState;
-        }
-        set
-        {
-            StateOnСhanged?.Invoke();
-            _startEntityState = value;
-        }
-   
-    }
-  
-
-    public EntityStatesHandler(EntityStateConfig entityState)
-    {
-        _entityState = entityState.States.ToArray();
-    }
-}
-
+    Move,
+    Build,
+    Atack
+};
 
 public class EntityStateMachine
 {
@@ -39,6 +18,7 @@ public class EntityStateMachine
     {
         _states = states.ToDictionary(state => state.EntityStateID, state => state);
         ActiveState = activeState;
+        _states[ActiveState].OnStateEnter();
     }
 
     public void SetState(EntityStateID entityState)
@@ -48,7 +28,7 @@ public class EntityStateMachine
 
         if (!_states.ContainsKey(entityState))
             throw new KeyNotFoundException();
-
+       
         _states[ActiveState].OnStateExit();
 
         ActiveState = entityState;
@@ -60,12 +40,4 @@ public class EntityStateMachine
     {
         _states[ActiveState].OnUpdate();
     }
-}
-
-public abstract class EntityStateBase
-{
-    public abstract EntityStateID EntityStateID { get; }
-    public abstract void OnStateEnter();
-    public abstract void OnStateExit();
-    public abstract void OnUpdate();
 }
