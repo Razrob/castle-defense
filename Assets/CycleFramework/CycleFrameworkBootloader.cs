@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-[ExecuteAlways]
-[DefaultExecutionOrder(500)]
+[DefaultExecutionOrder(-1000)]
 public class CycleFrameworkBootloader : MonoBehaviour
 {
     [SerializeField] private CycleState _startState;
@@ -14,33 +13,25 @@ public class CycleFrameworkBootloader : MonoBehaviour
     private CycleEventsRepository _cycleEventsRepository;
     private CycleEventsProcessor _cycleEventsProcessor;
 
-    private void OnEnable() => TryInitHierarñhy();
-    private void OnTransformChildrenChanged() => TryInitHierarñhy();
-
     private void Awake()
     {
-        TryInitHierarñhy();
-
-        if (Application.isPlaying)
-            InitFramework();
+        InitFramework();
     }
 
-    private void TryInitHierarñhy()
+    private void Start()
     {
-        if (_initializersParent is null)
-        {
-            _initializersParent = GetComponentInChildren<CycleInitializersParent>(true);
+        CycleEventsTransmitter cycleEventsTransmitter =
+            new GameObject($"[Framework] {nameof(CycleEventsTransmitter)}").AddComponent<CycleEventsTransmitter>();
 
-            if (_initializersParent is null)
-            {
-                _initializersParent = new GameObject("Initializers").AddComponent<CycleInitializersParent>();
-                _initializersParent.transform.parent = transform;
-            }
-        }
+        cycleEventsTransmitter.transform.parent = transform;
+        cycleEventsTransmitter.transform.SetSiblingIndex(0);
+
+        cycleEventsTransmitter.Init(_cycleStateMachine, _cycleEventsProcessor);
     }
 
     private void InitFramework()
     {
+        _initializersParent = GetComponentInChildren<CycleInitializersParent>(true);
         _cycleStateMachine = new CycleStateMachine(_startState);
         Dictionary<CycleMethodType, MethodInfo> methods = new Dictionary<CycleMethodType, MethodInfo>();
 
@@ -49,14 +40,6 @@ public class CycleFrameworkBootloader : MonoBehaviour
 
         _cycleEventsRepository = new CycleEventsRepository(methods, _initializersParent.CycleInitializersHandlers.Values);
         _cycleEventsProcessor = new CycleEventsProcessor(_cycleEventsRepository);
-
-        CycleEventsTransmitter cycleEventsTransmitter = 
-            new GameObject($"[Framework] {nameof(CycleEventsTransmitter)}").AddComponent<CycleEventsTransmitter>();
-
-        cycleEventsTransmitter.transform.parent = transform;
-        cycleEventsTransmitter.transform.SetSiblingIndex(0);
-
-        cycleEventsTransmitter.Init(_cycleStateMachine, _cycleEventsProcessor);
 
         new FWC(_cycleStateMachine);
     }

@@ -7,6 +7,7 @@ public class GlobalData
     public PlayerData PlayerData;
     public ConstructionsRepository ConstructionsRepository;
     public UnitRepository UnitRepository;
+    public CameraPresetsChangeData CameraPresetsChangeData;
 
     public Pool<Projectile, ProjectileShape> ProjectilesPool;
 
@@ -16,5 +17,6 @@ public class GlobalData
         PlayerData = new PlayerData();
         ConstructionsRepository = new ConstructionsRepository();
         UnitRepository = new UnitRepository();
+        CameraPresetsChangeData = new CameraPresetsChangeData();
     }
 }

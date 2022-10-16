@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-[ExecuteAlways]
+[DefaultExecutionOrder(-3000)]
 public class CycleInitializersParent : MonoBehaviour
 {
     private readonly BindingFlags _defaultFlag = BindingFlags.Instance | BindingFlags.Public |  BindingFlags.NonPublic;
@@ -16,60 +16,11 @@ public class CycleInitializersParent : MonoBehaviour
     private void Awake()
     {
         InitInitializers();
-        TryInitHierarсhy();
     }
-
-    private void OnEnable()
-    {
-        InitInitializers();
-        TryInitHierarсhy();
-    }
-
-    private void OnTransformChildrenChanged() => TryInitHierarсhy();
-    private void OnTransformParentChanged() => TryInitHierarсhy();
 
     private void InitInitializers()
     {
         CycleInitializersHandlers = GetComponentsInChildren<CycleInitializersHandler>(true)
             .ToDictionary(handler => handler.CycleState, handler => handler);
-    }
-
-    private void TryInitHierarсhy()
-    {
-        if (_flowLocker != null)
-            return;
-
-        _flowLocker = new object();
-
-        CycleState[] states = (CycleState[])Enum.GetValues(typeof(CycleState));
-
-        if (_initializerHandlers != null && _initializerHandlers.Count == states.Length)
-            goto MethodEnd;
-
-        _initializerHandlers = new Dictionary<CycleState, CycleInitializersHandler>(states.Length);
-
-        CycleInitializersHandler[] handlers = GetComponentsInChildren<CycleInitializersHandler>(true);
-
-        foreach (CycleInitializersHandler handler in handlers)
-            _initializerHandlers.Add(handler.CycleState, handler);
-
-        foreach (CycleState cycleState in states)
-        {
-            if (!_initializerHandlers.ContainsKey(cycleState))
-            {
-                CycleInitializersHandler handler = new GameObject($"[{nameof(CycleState)}] {cycleState}")
-                    .AddComponent<CycleInitializersHandler>();
-
-                FieldInfo stateField = handler.GetType().GetFields(_defaultFlag).Find(field => field.FieldType == typeof(CycleState));
-                stateField.SetValue(handler, cycleState);
-                handler.transform.parent = transform;
-
-                _initializerHandlers.Add(cycleState, handler);
-            }
-        }
-
-    MethodEnd:
-
-        _flowLocker = null;
     }
 }
