@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class WarrionMoveState : EntityStateBase
 {
@@ -8,19 +9,27 @@ public class WarrionMoveState : EntityStateBase
     public override EntityStateID EntityStateID => _entityStateID;
 
     private Animator _animator;
-    private Player _warrion;
+    private Vector3 _velocity => _attackUnit.Velocity;
+    private AttackUnit _attackUnit;
+
+    public WarrionMoveState(AttackUnit attackUnit)
+    {
+        _attackUnit = attackUnit;
+        _animator = attackUnit.Animator;
+    }
 
     public override void OnStateEnter()
     {
-    //    _player = FWC.GlobalData.PlayerData.Player;
-    //   _animator = _player.Animator;
-     //   _animator.Play("Movement");
+        _animator.Play("Movement");
+       
     }
 
     public override void OnUpdate()
     {
-        _animator.SetFloat("Speed", FWC.GlobalData.UserInput.JoystickOffcet.magnitude);
+        _attackUnit.SetDestination(FWC.GlobalData.PlayerData.Player.Transform.position);
+        _animator.SetFloat("Speed", Mathf.Lerp(0, _velocity.magnitude, 0.3f));
     }
+
     public override void OnStateExit()
     {
 
