@@ -10,13 +10,24 @@ public class UnitStateMachineUpdater : CycleInitializerBase
     {
         _unitRepository = FWC.GlobalData.UnitRepository;
     }
+
     protected override void OnUpdate()
     {
         foreach (var unitList in _unitRepository.Units)
         {
             foreach (var unit in unitList.Value)
             {
-                unit.StateMachine.OnUpdate();
+               unit.StateMachine.OnUpdate();
+            }
+        }
+    }
+    protected override void OnFixedUpdate()
+    {
+        foreach (var unitList in _unitRepository.Units)
+        {
+            foreach (var unit in unitList.Value)
+            {
+                unit.StateMachine.OnFixedUpdate();
             }
         }
     }

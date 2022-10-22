@@ -16,6 +16,11 @@ public class PlayerMoveState : EntityStateBase
         _animator.Play("Movement");
     }
 
+    public override void OnFixedUpdate()
+    {
+    }
+
+
     public override void OnUpdate()
     {
         _animator.SetFloat("Speed", FWC.GlobalData.PlayerData.Player.CharacterController.velocity.magnitude);

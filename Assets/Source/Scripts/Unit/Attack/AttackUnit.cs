@@ -1,20 +1,22 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public abstract class AttackUnit : UnitBase
 {
-    [SerializeField] private NavMeshAgent _navMeshAgent;
+    [SerializeField] private ConstructionTriggerBehaviour _triggerBehaviour;
 
     public sealed override UnitType UnitType => UnitType.AttackUnit;
-    public Vector3 Velocity => _navMeshAgent.velocity;
 
-    public void SetDestination(Vector3 position)
+    private List<ConstructionBase> _closesConstructions = new List<ConstructionBase>();
+    public IReadOnlyList<ConstructionBase> ClosesConstructions => _closesConstructions;
+
+    public ConstructionBase NearestConstruction { get; private set; }
+
+    protected override void OnAwake()
     {
-        _navMeshAgent.SetDestination(position);
+        _triggerBehaviour.EnterEvent += component => _closesConstructions.Add((ConstructionBase)component);
+        _triggerBehaviour.ExitEvent += component => _closesConstructions.Remove((ConstructionBase)component);
     }
 
-    public void Warp(Vector3 position)
-    {
-        _navMeshAgent.Warp(position);
-    }
 }

@@ -23,8 +23,11 @@ public class WarrionMoveState : EntityStateBase
         _animator.Play("Movement");
        
     }
-
     public override void OnUpdate()
+    {
+   
+    }
+    public override void OnFixedUpdate()
     {
         _attackUnit.SetDestination(FWC.GlobalData.PlayerData.Player.Transform.position);
         _animator.SetFloat("Speed", Mathf.Lerp(0, _velocity.magnitude, 0.3f));

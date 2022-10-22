@@ -6,7 +6,7 @@ public enum EntityStateID
 {
     Move,
     Build,
-    Atack
+    Attack
 };
 
 public class EntityStateMachine
@@ -39,5 +39,10 @@ public class EntityStateMachine
     public void OnUpdate()
     {
         _states[ActiveState].OnUpdate();
+    }
+
+    public void OnFixedUpdate()
+    {
+        _states[ActiveState].OnFixedUpdate();
     }
 }
