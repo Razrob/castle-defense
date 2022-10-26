@@ -35,6 +35,11 @@ public class EntityStateMachine
 
         _states[ActiveState].OnStateEnter();
     }
+ 
+    public TState GetState<TState>(EntityStateID stateID) where TState : EntityStateBase
+    {
+        return (TState)_states[stateID];
+    }
 
     public void OnUpdate()
     {

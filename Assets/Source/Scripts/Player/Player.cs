@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     private EntityStateMachine _stateMachine;  
     [SerializeField] private float _speed;
+    [SerializeField] private Camera _camera;
 
     private Rigidbody _rigidbody;
     private Transform _transform;
@@ -18,6 +19,7 @@ public class Player : MonoBehaviour
     public Transform Transform => _transform;
     public CharacterController CharacterController => _characterController;
     public Animator Animator => _animator;
+    public Camera Camera => _camera;
 
     private void Awake()
     {

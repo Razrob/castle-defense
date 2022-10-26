@@ -7,6 +7,7 @@ public class GlobalData
     public PlayerData PlayerData;
     public ConstructionsRepository ConstructionsRepository;
     public UnitRepository UnitRepository;
+    public ResourceRepository ResourceRepository;
     public CameraPresetsChangeData CameraPresetsChangeData;
 
     public Pool<Projectile, ProjectileShape> ProjectilesPool;

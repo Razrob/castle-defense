@@ -14,4 +14,9 @@ public class PlayerStateUpdater : CycleInitializerBase
     {
         _stateMachine.OnUpdate();
     }
+
+    protected override void OnFixedUpdate()
+    {
+        _stateMachine.OnFixedUpdate();
+    }
 }

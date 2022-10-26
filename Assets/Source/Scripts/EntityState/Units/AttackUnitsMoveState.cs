@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AtackUnitsMoveState : UnitMoveStateBase
+public class AttackUnitsMoveState : UnitMoveStateBase
 {
     private EntityStateID _entityStateID = EntityStateID.Move;
     public override EntityStateID EntityStateID => _entityStateID;
@@ -16,7 +16,7 @@ public class AtackUnitsMoveState : UnitMoveStateBase
     private CostructionPathInfo _costructionPathInfo;
     public CostructionPathInfo CostructionPathInfo => _costructionPathInfo;
 
-    public AtackUnitsMoveState(AttackUnit attackUnit)
+    public AttackUnitsMoveState(AttackUnit attackUnit)
     {
         _unit = attackUnit;
         _animator = attackUnit.Animator;

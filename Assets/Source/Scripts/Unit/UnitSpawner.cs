@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UnitSpawner : CycleInitializerBase
 {
     private UnitRepository _unitRepository;
-    [SerializeField ]private GameObject _unit;
+    [SerializeField] private GameObject _unit;
 
     protected override void OnInit()
     {

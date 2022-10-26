@@ -17,7 +17,7 @@ public class UnitStateMachineUpdater : CycleInitializerBase
         {
             foreach (var unit in unitList.Value)
             {
-               unit.StateMachine.OnUpdate();
+          //      unit.StateMachine.OnUpdate();
             }
         }
     }
@@ -27,7 +27,7 @@ public class UnitStateMachineUpdater : CycleInitializerBase
         {
             foreach (var unit in unitList.Value)
             {
-                unit.StateMachine.OnFixedUpdate();
+           //     unit.StateMachine.OnFixedUpdate();
             }
         }
     }

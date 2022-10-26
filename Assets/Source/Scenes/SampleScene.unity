@@ -1779,6 +1779,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 2cc15f4d95e754e4284cf34f16d0ab9f, type: 3}
   m_PrefabInstance: {fileID: 358100530}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &367418816
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 367418817}
+  - component: {fileID: 367418818}
+  m_Layer: 0
+  m_Name: ResourceInitializer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &367418817
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367418816}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 494004978}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &367418818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367418816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b4b6547ac0641478c5258b9b59c4be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceConfigs:
+  - {fileID: 11400000, guid: fd8566d5271e0714192a51f4147dd29c, type: 2}
 --- !u!1001 &368642749
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2194,6 +2239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 3
+  _camera: {fileID: 963194227}
 --- !u!143 &550897858
 CharacterController:
   m_ObjectHideFlags: 0
@@ -4135,6 +4181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 0}
   _navMeshAgent: {fileID: 1067495071}
+  _triggerBehaviour: {fileID: 0}
 --- !u!136 &1067495069
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6992,7 +7039,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8174352189191845985, guid: a5b6562bb3037474c962a0557a6252d0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a5b6562bb3037474c962a0557a6252d0, type: 3}
 --- !u!1 &8491996513187177943 stripped
 GameObject:
