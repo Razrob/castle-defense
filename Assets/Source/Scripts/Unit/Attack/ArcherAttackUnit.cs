@@ -1,6 +1,6 @@
 ﻿using System;
 
-public class ArcherAttackUnit : AttackUnit
+public abstract class ArcherAttackUnit : AttackUnit
 {
 
 }

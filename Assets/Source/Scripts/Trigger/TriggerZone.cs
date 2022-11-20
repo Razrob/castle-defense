@@ -24,7 +24,7 @@ public abstract class TriggerZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent(out ITriggerable component))
+        if (other.TryGetComponent(out ITriggerable component))
         {
             if (_containsComponents.Contains(component))
                 return;

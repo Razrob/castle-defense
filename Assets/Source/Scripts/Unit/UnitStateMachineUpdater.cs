@@ -9,25 +9,32 @@ public class UnitStateMachineUpdater : CycleInitializerBase
     protected override void OnInit()
     {
         _unitRepository = FWC.GlobalData.UnitRepository;
+        foreach (KeyValuePair<UnitType, List<UnitBase>> unitList in _unitRepository.Units)
+        {
+            foreach (UnitBase unit in unitList.Value)
+            {
+             //   unit.Awake();
+            }
+        }
     }
 
     protected override void OnUpdate()
     {
-        foreach (var unitList in _unitRepository.Units)
+        foreach (KeyValuePair<UnitType, List<UnitBase>> unitList in _unitRepository.Units)
         {
-            foreach (var unit in unitList.Value)
+            foreach (UnitBase unit in unitList.Value)
             {
-          //      unit.StateMachine.OnUpdate();
+        //        unit.OnUpdateMain();
             }
         }
     }
     protected override void OnFixedUpdate()
     {
-        foreach (var unitList in _unitRepository.Units)
+        foreach (KeyValuePair<UnitType, List<UnitBase>> unitList in _unitRepository.Units)
         {
-            foreach (var unit in unitList.Value)
+            foreach (UnitBase unit in unitList.Value)
             {
-           //     unit.StateMachine.OnFixedUpdate();
+            //    unit.OnFixedUpdateMain();
             }
         }
     }

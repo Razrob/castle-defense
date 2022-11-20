@@ -1824,6 +1824,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _resourceConfigs:
   - {fileID: 11400000, guid: fd8566d5271e0714192a51f4147dd29c, type: 2}
+  - {fileID: 11400000, guid: 92253bddc3f056141bbc6eedd0a2bfd8, type: 2}
 --- !u!1001 &368642749
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4181,7 +4182,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 0}
   _navMeshAgent: {fileID: 1067495071}
+  _healthStorage:
+    _currentValue: 100
+    _capacity: 100
   _triggerBehaviour: {fileID: 0}
+  _closesConstructions: []
+  <NearestConstruction>k__BackingField: {fileID: 0}
 --- !u!136 &1067495069
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6991,6 +6997,10 @@ PrefabInstance:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 8174352189191846015, guid: a5b6562bb3037474c962a0557a6252d0, type: 3}
+      propertyPath: m_Name
+      value: PlayerStateUpdater
+      objectReference: {fileID: 0}
     - target: {fileID: 8174352189378447000, guid: a5b6562bb3037474c962a0557a6252d0, type: 3}
       propertyPath: m_Name
       value: CycleFrameworkBootloader

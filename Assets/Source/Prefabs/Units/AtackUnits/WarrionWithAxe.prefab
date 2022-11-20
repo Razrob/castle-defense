@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5230880268006788164}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.253545, y: 0, z: -0.47760993}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.1111112, y: 1.1111112, z: 1.1111112}
   m_Children: []
   m_Father: {fileID: 8996297321160148579}
@@ -43,8 +43,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 300
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 1.2
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &2851540941165748972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,6 +297,10 @@ PrefabInstance:
     - target: {fileID: 8054873092431699960, guid: c6aa9ad042c67f7468616e0c927aec70, type: 3}
       propertyPath: m_Name
       value: Low Poly Warrior
+      objectReference: {fileID: 0}
+    - target: {fileID: 8054873092431699960, guid: c6aa9ad042c67f7468616e0c927aec70, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8054873092439092712, guid: c6aa9ad042c67f7468616e0c927aec70, type: 3}
       propertyPath: m_Avatar

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public abstract class ConstructionBase : MonoBehaviour, IConstruction
+public abstract class ConstructionBase : MonoBehaviour, IConstruction, ITriggerable
 {
     public abstract ConstructionID ConstructionID { get; }
 

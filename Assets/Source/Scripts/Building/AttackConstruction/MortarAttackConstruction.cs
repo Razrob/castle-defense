@@ -24,7 +24,11 @@ public class MortarAttackConstruction : AttackConstruction
         if (NearestUnit is null)
             return;
 
-        Quaternion targetRotation =
+        Vector3 unitDirection = (NearestUnit.transform.position.XZ() - transform.position.XZ()).normalized;
+        Quaternion targetRotation = new Quaternion();
+
+        if (unitDirection!= Vector3.zero)
+        targetRotation =
             Quaternion.LookRotation((NearestUnit.transform.position.XZ() - transform.position.XZ()).normalized, Vector3.up)
             * Quaternion.Euler(Vector3.right * -_angle);
 

@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,6 +9,9 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ITriggerable, IDamagable
 
     protected ResourceStorage _healthStorage = new ResourceStorage(100, 100);
     protected EntityStateMachine _stateMachine;
+    protected event Action _updateEvent;
+    protected event Action _fixedUpdateEvent;
+    protected event Action _startEvent;
 
     public NavMeshAgent NavMeshAgent => _navMeshAgent;
     public Animator Animator => _animator;
@@ -22,9 +24,6 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ITriggerable, IDamagable
 
     public event Action<UnitBase> OnUnitDied;
 
-    protected virtual void OnAwake() { }
-    protected virtual void OnUpdate() { }
-
     public void TakeDamage(IDamageApplicator damageApplicator)
     {
         if (IsDied)
@@ -36,8 +35,6 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ITriggerable, IDamagable
         if (IsDied)
             OnUnitDied?.Invoke(this);
     }
-
-    protected virtual void OnDamaged() { }
 
     public void SetDestination(Vector3 position)
     {
@@ -53,4 +50,11 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ITriggerable, IDamagable
     {
         return _navMeshAgent.hasPath;
     }
+
+    protected virtual void OnDamaged() { }
+
+    protected abstract void Awake();
+    protected void Start() => _startEvent?.Invoke();
+    protected void Update() => _updateEvent?.Invoke();
+    protected void FixedUpdate() => _fixedUpdateEvent?.Invoke();
 }

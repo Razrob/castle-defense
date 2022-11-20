@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 540160673293435525}
   - component: {fileID: 6530555486081867999}
+  - component: {fileID: 6757962610777902757}
   m_Layer: 0
   m_Name: DefenceWall_2
   m_TagString: Untagged
@@ -45,6 +46,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defenceWallSkin: {fileID: 6422028552099699557}
+--- !u!65 &6757962610777902757
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540160673293435526}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.31, z: 1}
+  m_Center: {x: 0, y: 0.65, z: 0}
 --- !u!1001 &540160674151330280
 PrefabInstance:
   m_ObjectHideFlags: 0
