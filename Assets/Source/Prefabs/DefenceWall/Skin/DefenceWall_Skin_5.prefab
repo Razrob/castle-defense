@@ -50,6 +50,7 @@ MonoBehaviour:
   _localPose:
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 0}
+  _constructionLevel: 1
   _sidesPack:
     _sides:
     - _sideName: 0

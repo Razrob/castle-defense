@@ -32,7 +32,8 @@ public class DefenceWallConstruction : ConstructionBase, ISpecificFormConstructi
         if (!defenceWallsConfig.TryFindWall(sidesPack, out configuration))
             configuration = defenceWallsConfig.DefaultWall;
 
-        _defenceWallSkin = (DefenceWallSkin)Instantiate(configuration.SkinPrefab, transform.position, configuration.Rotation, transform);
+        _defenceWallSkin = (DefenceWallSkin)Instantiate(configuration.Skins[ConstructionLevel.Level_1], 
+            transform.position, configuration.Rotation, transform);
         _defenceWallSkin.transform.rotation = configuration.Rotation;
     }
 }

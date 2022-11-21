@@ -9,6 +9,8 @@ public class ConstructionsRepository : IConstructionGrid
 
     public IReadOnlyCollection<Vector3Int> Positions => _constructions.Keys;
 
+    public event Action OnRepositoryChange;
+
     public ConstructionsRepository()
     {
         _constructionConfig = ConfigsRepository.FindConfig<BuildingGridConfig>() ??
@@ -32,7 +34,10 @@ public class ConstructionsRepository : IConstructionGrid
         if (_constructions.ContainsKey(position))
             throw new Exception($"Position {position} already exist in grid");
 
+        construction.transform.position = position;
         _constructions.Add(position, new ConstructionCellData(construction));
+
+        OnRepositoryChange?.Invoke();
     }
 
     public ConstructionBase GetConstruction(Vector3Int position)

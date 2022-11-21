@@ -7,6 +7,8 @@ public class AttackConstructionTester : CycleInitializerBase
 
     protected override void OnUpdate()
     {
+        return;
+
         if (Input.GetMouseButtonUp(1))
         {
             RaycastHit[] raycastHits = Physics.RaycastAll(Camera.main.ScreenPointToRay(Input.mousePosition));
@@ -19,7 +21,7 @@ public class AttackConstructionTester : CycleInitializerBase
                 if (FWC.GlobalData.ConstructionsRepository.ConstructionExist(position.ToInt()))
                     return;
 
-                MortarAttackConstruction mortar = _constructionFactory.Create<MortarAttackConstruction>(ConstructionID.Mortar);
+                MortarAttackConstruction mortar = _constructionFactory.CreateSolid<MortarAttackConstruction>(ConstructionID.Mortar);
                 mortar.transform.position = position;
 
                 FWC.GlobalData.ConstructionsRepository.AddConstruction(position.ToInt(), mortar);

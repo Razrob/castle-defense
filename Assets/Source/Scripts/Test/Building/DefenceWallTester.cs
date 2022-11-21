@@ -14,6 +14,8 @@ public class DefenceWallTester : CycleInitializerBase
 
     protected override void OnUpdate()
     {
+        return;
+
         if (Input.GetMouseButtonUp(0))
         {
             RaycastHit[] raycastHits = Physics.RaycastAll(Camera.main.ScreenPointToRay(Input.mousePosition));
@@ -26,7 +28,7 @@ public class DefenceWallTester : CycleInitializerBase
                 if (FWC.GlobalData.ConstructionsRepository.ConstructionExist(position.ToInt()))
                     return;
 
-                DefenceWallConstruction defenceWall = _constructionFactory.Create<DefenceWallConstruction>(ConstructionID.Defence_Wall);
+                DefenceWallConstruction defenceWall = _constructionFactory.CreateSolid<DefenceWallConstruction>(ConstructionID.Defence_Wall);
                 defenceWall.transform.position = position + Vector3.down * 1f;
 
                 FWC.GlobalData.ConstructionsRepository.AddConstruction(position.ToInt(), defenceWall);

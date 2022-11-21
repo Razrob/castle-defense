@@ -15,6 +15,9 @@ MonoBehaviour:
   _attackConstructionPairs:
   - ConstructionID: 20
     Configuration:
+      _skins:
+      - {fileID: 1027402728360758852, guid: ebef833e0f7f50949912ddfd2b66ce2c, type: 3}
+      _buildingsSkins: []
       ConstructionPrefab: {fileID: 5556265040905442284, guid: 2088f88c13a19af488b6d4eb12979c8e, type: 3}
-      SkinPrefab: {fileID: 1027402728360758852, guid: ebef833e0f7f50949912ddfd2b66ce2c, type: 3}
+      Preview: {fileID: 3072237651995330132, guid: 6a18c4212e7afc043a90921c8b78ac26, type: 3}
       Rotation: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}

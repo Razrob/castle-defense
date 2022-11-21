@@ -48,6 +48,7 @@ MonoBehaviour:
   _localPose:
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 0}
+  _constructionLevel: 1
   _mortarGun: {fileID: 1027402728360599591}
   _mortarFoundation: {fileID: 1027402728360597625}
   _bulletSpawnPoint: {fileID: 1027402729142923281}

@@ -9,6 +9,8 @@ public class GlobalData
     public UnitRepository UnitRepository;
     public ResourceRepository ResourceRepository;
     public CameraPresetsChangeData CameraPresetsChangeData;
+    public ConstructionPlacementData ConstructionPlacementData;
+    public SpecificFormConstructionTransformer FormConstructionTransformer;
 
     public Pool<Projectile, ProjectileShape> ProjectilesPool;
 
@@ -19,5 +21,7 @@ public class GlobalData
         ConstructionsRepository = new ConstructionsRepository();
         UnitRepository = new UnitRepository();
         CameraPresetsChangeData = new CameraPresetsChangeData();
+        ConstructionPlacementData = new ConstructionPlacementData();
+        FormConstructionTransformer = new SpecificFormConstructionTransformer(ConstructionsRepository);
     }
 }

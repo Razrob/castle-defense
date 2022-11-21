@@ -22,7 +22,9 @@ public class DefenceWallsConfig : ScriptableObject, ISingleConfig
                 {
                     configuration = new ConstructionConfiguration<DefenceWallConstruction>(
                         defenceWall.ConstructionPrefab,
-                        defenceWall.SkinPrefab,
+                        defenceWall.Preview,
+                        defenceWall.Skins.Values,
+                        defenceWall.BuildingProcessSkins.Values,
                         Quaternion.Euler(-euler));
 
                     return true;

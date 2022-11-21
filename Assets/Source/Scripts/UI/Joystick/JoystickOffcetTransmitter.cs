@@ -6,7 +6,7 @@ public class JoystickOffcetTransmitter : CycleInitializerBase
     [SerializeField] private float _maxStickDistance;
 
     private JoystickUIScreen _screen;
-    private Vector2 Offcet => ((Vector2)_screen.Stick.transform.position - _stickPivot) / _maxStickDistance;
+    private Vector2 Offcet => ((Vector2)_screen.Stick.transform.position - _stickPivot) / CalculateRealMaxStickDistance();
 
     private Vector2 _stickPivot;
 
@@ -30,10 +30,10 @@ public class JoystickOffcetTransmitter : CycleInitializerBase
     private void Dragging(PointerEventData eventData)
     {
         float distance = Vector2.Distance(eventData.position, _stickPivot);
-        if (distance <= _maxStickDistance)
+        if (distance <= CalculateRealMaxStickDistance())
             _screen.Stick.position = eventData.position;
         else 
-            _screen.Stick.position = _stickPivot + (eventData.position - _stickPivot).normalized * _maxStickDistance;
+            _screen.Stick.position = _stickPivot + (eventData.position - _stickPivot).normalized * CalculateRealMaxStickDistance();
 
         FWC.GlobalData.UserInput.JoystickOffcet = Offcet;
     }
@@ -43,5 +43,10 @@ public class JoystickOffcetTransmitter : CycleInitializerBase
         _screen.Stick.gameObject.SetActive(false);
         _screen.StickArea.gameObject.SetActive(false);
        FWC.GlobalData.UserInput.JoystickOffcet = Vector2.zero;
+    }
+
+    private float CalculateRealMaxStickDistance()
+    {
+        return _maxStickDistance * (Camera.main.pixelWidth / 1080f);
     }
 }
