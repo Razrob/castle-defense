@@ -13,12 +13,14 @@ public class ConstructionPlacer : CycleInitializerBase
     {
         _constructionPlacementScreen = UIScreenRepository.GetScreen<ConstructionPlacementScreen>();
 
-
         _constructionPlacementScreen.OnConstructionSelect += () => 
             ChangePlacementMode(PlacementMode.Proccess, _constructionPlacementScreen.SelectedConstructionID);
 
-        _constructionPlacementScreen.OnActiveChange += value => 
-            ChangePlacementMode(value ? PlacementMode.Proccess : PlacementMode.Empty, _constructionPlacementScreen.SelectedConstructionID);
+        _constructionPlacementScreen.OnActiveChange += value =>
+        {
+            if (!value)
+                ChangePlacementMode(PlacementMode.Empty, null);
+        };
 
         _constructionPlacementScreen.OnApply += ApplyPlacement;
     }
@@ -46,11 +48,6 @@ public class ConstructionPlacer : CycleInitializerBase
 
         FWC.GlobalData.ConstructionPlacementData.ChangePlacementMode(placementMode, configuration);
     }
-
-    //private void OnPlacementModeChange(PlacementMode placementMode)
-    //{
-
-    //}
 
     private void ApplyPlacement()
     {

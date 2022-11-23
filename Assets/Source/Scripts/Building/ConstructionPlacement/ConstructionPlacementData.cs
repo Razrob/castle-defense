@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 public class ConstructionPlacementData
 {
@@ -9,11 +10,13 @@ public class ConstructionPlacementData
 
     public void ChangePlacementMode(PlacementMode placementMode, ConstructionConfiguration<IConstruction>? configuration)
     {
-        if (PlacementMode == placementMode 
-            && (CurrentPlacementInfo != null == configuration.HasValue))
-            return;
-
         PlacementMode = placementMode;
+
+        if (CurrentPlacementInfo != null)
+        {
+            GameObject.Destroy(CurrentPlacementInfo.Preview.gameObject);
+        }
+
         CurrentPlacementInfo = configuration.HasValue ? new ConstructionPlacementInfo(configuration.Value) : null;
 
         OnPlacementModeChange?.Invoke();
