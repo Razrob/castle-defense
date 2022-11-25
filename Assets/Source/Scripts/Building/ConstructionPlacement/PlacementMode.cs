@@ -1,4 +1,5 @@
-﻿public enum PlacementMode
+﻿
+public enum PlacementMode
 {
     Empty,
     Proccess,

@@ -6,24 +6,28 @@ using UnityEngine;
 [Serializable]
 public struct ConstructionConfiguration<TConstruction> : ISerializationCallbackReceiver where TConstruction : IConstruction
 {
+    [SerializeField] private float _buildingDuration;
     [SerializeField] private ConstructionSkinBase[] _skins;
     [SerializeField] private BuildingProcessSkinBase[] _buildingsSkins;
 
-    public ConstructionID ConstructionID => ConstructionPrefab.ConstructionID;
-
     public TConstruction ConstructionPrefab;
     public ConstructionPreviewBase Preview;
-    public IReadOnlyDictionary<ConstructionLevel, ConstructionSkinBase> Skins { get; private set; }
-    public IReadOnlyDictionary<ConstructionLevel, BuildingProcessSkinBase> BuildingProcessSkins { get; private set; }
     public Quaternion Rotation;
 
+    public float BuildingDuration => _buildingDuration;
+    public ConstructionID ConstructionID => ConstructionPrefab.ConstructionID;
+    public IReadOnlyDictionary<ConstructionLevel, ConstructionSkinBase> Skins { get; private set; }
+    public IReadOnlyDictionary<ConstructionLevel, BuildingProcessSkinBase> BuildingProcessSkins { get; private set; }
+
     public ConstructionConfiguration(TConstruction constructionPrefab, ConstructionPreviewBase preview,
-        IEnumerable<ConstructionSkinBase> skins, IEnumerable<BuildingProcessSkinBase> buildingProcessSkins, Quaternion rotation) 
-        : this()
+        IEnumerable<ConstructionSkinBase> skins, IEnumerable<BuildingProcessSkinBase> buildingProcessSkins, Quaternion rotation, 
+        float buildingDuration) : this()
     {
-        Preview = preview;
         _skins = skins.ToArray();
         _buildingsSkins = buildingProcessSkins.ToArray();
+        _buildingDuration = buildingDuration;
+
+        Preview = preview;
         ConstructionPrefab = constructionPrefab;
         Rotation = rotation;
 
@@ -62,6 +66,7 @@ public struct ConstructionConfiguration<TConstruction> : ISerializationCallbackR
             configuration.Preview,
             configuration.Skins.Values,
             configuration.BuildingProcessSkins.Values,
-            configuration.Rotation);
+            configuration.Rotation,
+            configuration.BuildingDuration);
     }
 }

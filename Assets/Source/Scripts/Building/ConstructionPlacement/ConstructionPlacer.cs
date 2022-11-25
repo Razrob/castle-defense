@@ -33,14 +33,21 @@ public class ConstructionPlacer : CycleInitializerBase
         Vector3 potentialPosition = FWC.GlobalData.PlayerData.Player.transform.position
             + FWC.GlobalData.PlayerData.Player.transform.rotation * _potentialPositionLocalOffcet;
 
-        potentialPosition = FWC.GlobalData.ConstructionsRepository.RoundPositionToGrid(potentialPosition);
-        FWC.GlobalData.ConstructionPlacementData.CurrentPlacementInfo.SetPotentialPlacementPosition(potentialPosition);
+        potentialPosition = FWC.GlobalData.ConstructionsRepository.RoundPositionToGrid(potentialPosition).SetY(0f);
 
+        if (FWC.GlobalData.ConstructionsRepository.ConstructionExist(potentialPosition.ToInt()))
+            return;
+
+        FWC.GlobalData.ConstructionPlacementData.CurrentPlacementInfo.SetPotentialPlacementPosition(potentialPosition);
         FWC.GlobalData.ConstructionPlacementData.CurrentPlacementInfo.Preview.transform.position = potentialPosition;
     }
 
     private void ChangePlacementMode(PlacementMode placementMode, ConstructionID? constructionID)
     {
+        if (placementMode is PlacementMode.Proccess
+            && FWC.GlobalData.ConstructionsRepository.AnyConstructionInBuilding())
+            return;
+
         ConstructionConfiguration<IConstruction>? configuration = null;
 
         if (placementMode is PlacementMode.Proccess)
@@ -51,6 +58,9 @@ public class ConstructionPlacer : CycleInitializerBase
 
     private bool TryApplyPlacement()
     {
+        if (!FWC.GlobalData.ConstructionPlacementData.CurrentPlacementInfo.PotentialPlacementPosition.HasValue)
+            return false;
+
         if (!FWC.GlobalData.ResourceRepository.SubstructAvailable(_constructionPlacementScreen.SelectedCell.Price))
             return false;
 
@@ -58,11 +68,19 @@ public class ConstructionPlacer : CycleInitializerBase
 
         Destroy(FWC.GlobalData.ConstructionPlacementData.CurrentPlacementInfo.Preview.gameObject);
 
+        ConstructionID constructionID = FWC.GlobalData.ConstructionPlacementData.CurrentPlacementInfo.Configuration.ConstructionID;
+
         ConstructionBase construction = _constructionFactory
-            .CreateSolid<ConstructionBase>(FWC.GlobalData.ConstructionPlacementData.CurrentPlacementInfo.Configuration.ConstructionID);
+            .CreateSolid<ConstructionBase>(constructionID);
+
+        float buildingDuration = _constructionFactory.GetConfiguration(constructionID).BuildingDuration;
+
+        if (buildingDuration > 0f)
+            construction.SetActivityState(ConstructionActivityState.Building_In_Progress);
 
         FWC.GlobalData.ConstructionsRepository
-            .AddConstruction(FWC.GlobalData.ConstructionPlacementData.CurrentPlacementInfo.PotentialPlacementPosition.ToInt(), construction);
+            .AddConstruction(FWC.GlobalData.ConstructionPlacementData.CurrentPlacementInfo.PotentialPlacementPosition.Value.ToInt(),
+            construction);
 
         ChangePlacementMode(PlacementMode.Empty, null);
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ConstructionsRepository : IConstructionGrid
@@ -10,6 +11,7 @@ public class ConstructionsRepository : IConstructionGrid
     public IReadOnlyCollection<Vector3Int> Positions => _constructions.Keys;
 
     public event Action OnRepositoryChange;
+    public event Action<ConstructionCellData> OnAdd;
 
     public ConstructionsRepository()
     {
@@ -18,6 +20,9 @@ public class ConstructionsRepository : IConstructionGrid
 
         _constructions = new Dictionary<Vector3Int, ConstructionCellData>();
     }
+
+    public bool AnyConstructionInBuilding() => 
+        _constructions.Values.Any(c => c.Construction.ActivityState is ConstructionActivityState.Building_In_Progress);
 
     public bool ConstructionExist(Vector3Int position)
     {
@@ -37,6 +42,7 @@ public class ConstructionsRepository : IConstructionGrid
         construction.transform.position = position;
         _constructions.Add(position, new ConstructionCellData(construction));
 
+        OnAdd?.Invoke(_constructions[position]);
         OnRepositoryChange?.Invoke();
     }
 

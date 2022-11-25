@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 [ExecuteAlways]
 [RequireComponent(typeof(SpriteRenderer))]
-public class AdvancedSprite : MonoBehaviour 
+public sealed class AdvancedSprite : MonoBehaviour 
 {
     [SerializeField] private bool _inverse = false;
     [SerializeField] [Range(0f, 1f)] private float _saturation = 1f;

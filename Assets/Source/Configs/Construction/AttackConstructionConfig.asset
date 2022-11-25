@@ -15,6 +15,7 @@ MonoBehaviour:
   _attackConstructionPairs:
   - ConstructionID: 20
     Configuration:
+      _buildingDuration: 5
       _skins:
       - {fileID: 1027402728360758852, guid: ebef833e0f7f50949912ddfd2b66ce2c, type: 3}
       _buildingsSkins: []

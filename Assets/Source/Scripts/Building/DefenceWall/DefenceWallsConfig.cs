@@ -25,7 +25,8 @@ public class DefenceWallsConfig : ScriptableObject, ISingleConfig
                         defenceWall.Preview,
                         defenceWall.Skins.Values,
                         defenceWall.BuildingProcessSkins.Values,
-                        Quaternion.Euler(-euler));
+                        Quaternion.Euler(-euler),
+                        defenceWall.BuildingDuration);
 
                     return true;
                 }

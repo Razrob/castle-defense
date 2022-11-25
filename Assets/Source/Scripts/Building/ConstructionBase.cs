@@ -9,6 +9,8 @@ public abstract class ConstructionBase : MonoBehaviour, IConstruction, ITriggera
     private ObjectHierarchyMethodsExecutor _hierarchyMethodsExecutor;
     private bool _startWasCalled;
 
+    public event Action<ConstructionBase> OnActivityStateChange;
+
     protected void Awake()
     {
         _hierarchyMethodsExecutor = new ObjectHierarchyMethodsExecutor(this);
@@ -42,5 +44,7 @@ public abstract class ConstructionBase : MonoBehaviour, IConstruction, ITriggera
             _startWasCalled = true; 
             _hierarchyMethodsExecutor.Execute(HierarchyMethodType.On_Start);
         }
+
+        OnActivityStateChange?.Invoke(this);
     }
 }

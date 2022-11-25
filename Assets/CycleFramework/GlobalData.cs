@@ -13,6 +13,7 @@ public class GlobalData
     public SpecificFormConstructionTransformer FormConstructionTransformer;
 
     public Pool<Projectile, ProjectileShape> ProjectilesPool;
+    public Pool<SpriteTimerBase, TimerType> TimersPool;
 
     public GlobalData()
     {

@@ -4,7 +4,7 @@ public class ConstructionPlacementInfo
 {
     public readonly ConstructionConfiguration<IConstruction> Configuration;
     public readonly ConstructionPreviewBase Preview;
-    public Vector3 PotentialPlacementPosition { get; private set; }
+    public Vector3? PotentialPlacementPosition { get; private set; }
 
     public ConstructionPlacementInfo(ConstructionConfiguration<IConstruction> configuration)
     {
@@ -12,7 +12,7 @@ public class ConstructionPlacementInfo
         Preview = GameObject.Instantiate(configuration.Preview);
     }
 
-    public void SetPotentialPlacementPosition(Vector3 position)
+    public void SetPotentialPlacementPosition(Vector3? position)
     {
         PotentialPlacementPosition = position;
     }
