@@ -3,18 +3,44 @@ using UnityEngine;
 
 public abstract class ConstructionBase : MonoBehaviour, IConstruction, ITriggerable
 {
+    public ConstructionActivityState ActivityState { get; private set; } = ConstructionActivityState.Enabled;
     public abstract ConstructionID ConstructionID { get; }
 
-    protected event Action _updateEvent;
+    private ObjectHierarchyMethodsExecutor _hierarchyMethodsExecutor;
+    private bool _startWasCalled;
 
     protected void Awake()
     {
-        OnAwake();
+        _hierarchyMethodsExecutor = new ObjectHierarchyMethodsExecutor(this);
+        _hierarchyMethodsExecutor.Execute(HierarchyMethodType.On_Awake);
     }
 
-    protected void Start() => OnStart();
-    protected void Update() => _updateEvent?.Invoke();
+    protected void Start()
+    {
+        if (ActivityState is ConstructionActivityState.Enabled)
+        {
+            _startWasCalled = true;
+            _hierarchyMethodsExecutor.Execute(HierarchyMethodType.On_Start);
+        }
+    }
 
-    protected virtual void OnAwake() { }
-    protected virtual void OnStart() { }
+    protected void Update()
+    {
+        if (ActivityState is ConstructionActivityState.Enabled)
+            _hierarchyMethodsExecutor.Execute(HierarchyMethodType.On_Update);
+    }
+
+    public void SetActivityState(ConstructionActivityState activityState)
+    {
+        if (ActivityState == activityState)
+            return;
+
+        ActivityState = activityState;
+
+        if (!_startWasCalled)
+        {
+            _startWasCalled = true; 
+            _hierarchyMethodsExecutor.Execute(HierarchyMethodType.On_Start);
+        }
+    }
 }

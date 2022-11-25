@@ -7189,7 +7189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24afb423dbca234897cf9e7ef2a6f2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _potentialPositionLocalOffcet: {x: 0, y: 0, z: 2}
+  _potentialPositionLocalOffcet: {x: 0, y: 0, z: 1.25}
 --- !u!1 &1222065250
 GameObject:
   m_ObjectHideFlags: 0

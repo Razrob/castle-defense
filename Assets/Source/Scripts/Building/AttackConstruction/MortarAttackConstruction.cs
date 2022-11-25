@@ -12,11 +12,7 @@ public class MortarAttackConstruction : AttackConstruction
 
     public override ConstructionID ConstructionID => ConstructionID.Mortar;
 
-    protected override void OnStart()
-    {
-        _updateEvent += OnUpdate;
-    }
-
+    [ExecuteHierarchyMethod(HierarchyMethodType.On_Update)]
     private void OnUpdate()
     {
         _lastShootTimer += Time.deltaTime;

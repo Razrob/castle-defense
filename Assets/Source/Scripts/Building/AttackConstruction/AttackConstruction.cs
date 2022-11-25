@@ -9,14 +9,15 @@ public abstract class AttackConstruction : ConstructionBase
     public IReadOnlyList<AttackUnit> ClosestUnits => _closesUnits;
     public AttackUnit NearestUnit { get; private set; }
 
-    protected override void OnAwake()
+
+    [ExecuteHierarchyMethod(HierarchyMethodType.On_Awake)]
+    private void OnAwake()
     {
         _triggerBehaviour.EnterEvent += component => _closesUnits.Add((AttackUnit)component);
         _triggerBehaviour.ExitEvent += component => _closesUnits.Remove((AttackUnit)component);
-
-        _updateEvent += OnUpdate;
     }
 
+    [ExecuteHierarchyMethod(HierarchyMethodType.On_Update)]
     private void OnUpdate()
     {
         RefreshNearestUnit();

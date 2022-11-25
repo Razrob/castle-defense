@@ -8,7 +8,8 @@ public class DefenceWallConstruction : ConstructionBase, ISpecificFormConstructi
 
     public override ConstructionID ConstructionID => ConstructionID.Defence_Wall;
 
-    protected override void OnAwake()
+    [ExecuteHierarchyMethod(HierarchyMethodType.On_Awake)]
+    private void OnAwake()
     {
         _defenceWallSkin = GetComponentInChildren<DefenceWallSkin>(true);
     }
