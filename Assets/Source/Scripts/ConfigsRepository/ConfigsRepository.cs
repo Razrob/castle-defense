@@ -90,3 +90,4 @@ public class ConfigsRepository : ScriptableObject
         return default;
     }
 }
+  

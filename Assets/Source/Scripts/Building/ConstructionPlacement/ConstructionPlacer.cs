@@ -14,7 +14,7 @@ public class ConstructionPlacer : CycleInitializerBase
         _constructionPlacementScreen = UIScreenRepository.GetScreen<ConstructionPlacementScreen>();
 
         _constructionPlacementScreen.OnConstructionSelect += () => 
-            ChangePlacementMode(PlacementMode.Proccess, _constructionPlacementScreen.SelectedConstructionID);
+            ChangePlacementMode(PlacementMode.Proccess, _constructionPlacementScreen.SelectedCell.ConstructionID);
 
         _constructionPlacementScreen.OnActiveChange += value =>
         {
@@ -22,7 +22,7 @@ public class ConstructionPlacer : CycleInitializerBase
                 ChangePlacementMode(PlacementMode.Empty, null);
         };
 
-        _constructionPlacementScreen.OnApply += ApplyPlacement;
+        _constructionPlacementScreen.OnTryApply += TryApplyPlacement;
     }
 
     protected override void OnUpdate()
@@ -49,8 +49,13 @@ public class ConstructionPlacer : CycleInitializerBase
         FWC.GlobalData.ConstructionPlacementData.ChangePlacementMode(placementMode, configuration);
     }
 
-    private void ApplyPlacement()
+    private bool TryApplyPlacement()
     {
+        if (!FWC.GlobalData.ResourceRepository.SubstructAvailable(_constructionPlacementScreen.SelectedCell.Price))
+            return false;
+
+        FWC.GlobalData.ResourceRepository.Substruct(_constructionPlacementScreen.SelectedCell.Price);
+
         Destroy(FWC.GlobalData.ConstructionPlacementData.CurrentPlacementInfo.Preview.gameObject);
 
         ConstructionBase construction = _constructionFactory
@@ -60,5 +65,7 @@ public class ConstructionPlacer : CycleInitializerBase
             .AddConstruction(FWC.GlobalData.ConstructionPlacementData.CurrentPlacementInfo.PotentialPlacementPosition.ToInt(), construction);
 
         ChangePlacementMode(PlacementMode.Empty, null);
+
+        return true;
     }
 }

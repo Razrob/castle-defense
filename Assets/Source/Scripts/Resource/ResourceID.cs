@@ -1,6 +1,7 @@
 ﻿public enum ResourceID
 {
-    Gold,
-    Stone
+    Gold = 0,
+    Stone = 1,
+    Wood = 2,
 }
 

@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: StoneResourceConfig
   m_EditorClassIdentifier: 
   _id: 1
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: e5f3437a4ee8d4d7699855d708eac35d, type: 3}
+  _startValue: 350
+  _capacity: Infinity

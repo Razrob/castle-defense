@@ -8,14 +8,15 @@ public class ConstructionPlacementScreen : UIScreen
     [SerializeField] private Button _closeButton;
     [SerializeField] private Button _applyButton;
     [SerializeField] private GameObject _cellsPanelParent;
-    [SerializeField] private ConstructionPlacementChoiceCell[] _cells;
+    
+    private ConstructionPlacementChoiceCell[] _cells;
 
     public bool IsOpen => _cellsPanelParent.activeSelf;
-    public ConstructionID SelectedConstructionID { get; private set; } = ConstructionID.Defence_Wall;
+    public ConstructionPlacementChoiceCell SelectedCell { get; private set; }
 
     public event Action<bool> OnActiveChange;
     public event Action OnConstructionSelect;
-    public event Action OnApply;
+    public event Func<bool> OnTryApply;
 
     private void Start()
     {
@@ -23,13 +24,15 @@ public class ConstructionPlacementScreen : UIScreen
         _closeButton.onClick.AddListener(() => ChangePanelActive(false));    
         _applyButton.onClick.AddListener(OnApplyButtonClick);
 
+        _cells = GetComponentsInChildren<ConstructionPlacementChoiceCell>(true);
+
         foreach (ConstructionPlacementChoiceCell cell in _cells)
             cell.OnClick += OnConstructionPlacementCellClick;
     }
 
     private void OnConstructionPlacementCellClick(ConstructionPlacementChoiceCell cell)
     {
-        SelectedConstructionID = cell.ConstructionID;
+        SelectedCell = cell;
         OnConstructionSelect?.Invoke();
     }
 
@@ -44,6 +47,10 @@ public class ConstructionPlacementScreen : UIScreen
 
     private void OnApplyButtonClick()
     {
-        OnApply?.Invoke();
+        if (OnTryApply is null)
+            return;
+
+        if (OnTryApply())
+            SelectedCell = null;
     }
 }

@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: GoldResourceConfig
   m_EditorClassIdentifier: 
   _id: 0
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: 01330dc57ce944de7a6967e1d4be9e28, type: 3}
+  _startValue: 250
+  _capacity: Infinity
