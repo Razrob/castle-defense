@@ -7,16 +7,15 @@ public class WarrionAttackUnit : AttackUnit
     private ConstructionsRepository _constructionsRepository;
     private AttackUnitsMoveState _moveState;
 
-    protected override void Awake()
-    {
-        OnInit();
+    [ExecuteHierarchyMethod(HierarchyMethodType.On_Awake)]
+    private void OnAwake()
+    { 
         _constructionsRepository = FWC.GlobalData.ConstructionsRepository;
         _stateMachine = new EntityStateMachine(new EntityStateBase[] { new AttackUnitsMoveState(this), new AttackUnitsAttackState(this) }, EntityStateID.Move);
         _moveState = _stateMachine.GetState<AttackUnitsMoveState>(EntityStateID.Move);
-        _updateEvent += OnUpdate;
-        _fixedUpdateEvent += OnFixedUpdate;
     }
 
+    [ExecuteHierarchyMethod(HierarchyMethodType.On_Update)]
     private void OnUpdate()
     {
 
@@ -24,6 +23,7 @@ public class WarrionAttackUnit : AttackUnit
         ChangeState();
     }
 
+    [ExecuteHierarchyMethod(HierarchyMethodType.On_FixedUpdate)]
     private void OnFixedUpdate()
     {
         _stateMachine.OnFixedUpdate();

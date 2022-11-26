@@ -7,11 +7,10 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ITriggerable, IDamagable
     [SerializeField] private Animator _animator;
     [SerializeField] private NavMeshAgent _navMeshAgent;
 
+    private ObjectHierarchyMethodsExecutor _hierarchyMethodsExecutor;
+
     protected ResourceStorage _healthStorage = new ResourceStorage(100, 100);
     protected EntityStateMachine _stateMachine;
-    protected event Action _updateEvent;
-    protected event Action _fixedUpdateEvent;
-    protected event Action _startEvent;
 
     public NavMeshAgent NavMeshAgent => _navMeshAgent;
     public Animator Animator => _animator;
@@ -26,6 +25,27 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ITriggerable, IDamagable
 
     public event Action<UnitBase> OnUnitDied;
     public event Action<IDamagable, IDamageApplicator> OnDamageTake;
+
+    private void Awake()
+    {
+        _hierarchyMethodsExecutor = new ObjectHierarchyMethodsExecutor(this);
+        _hierarchyMethodsExecutor.Execute(HierarchyMethodType.On_Awake);
+    }
+    private void Start()
+    {
+        _hierarchyMethodsExecutor.Execute(HierarchyMethodType.On_Start);
+    }
+
+    private void Update()
+    {
+        _hierarchyMethodsExecutor.Execute(HierarchyMethodType.On_Update);
+    }
+    private void FixedUpdate()
+    {
+        _hierarchyMethodsExecutor.Execute(HierarchyMethodType.On_FixedUpdate);
+    }
+
+    protected virtual void OnDamaged() { }
 
     public void TakeDamage(IDamageApplicator damageApplicator)
     {
@@ -53,11 +73,4 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ITriggerable, IDamagable
     {
         return _navMeshAgent.hasPath;
     }
-
-    protected virtual void OnDamaged() { }
-
-    protected abstract void Awake();
-    protected void Start() => _startEvent?.Invoke();
-    protected void Update() => _updateEvent?.Invoke();
-    protected void FixedUpdate() => _fixedUpdateEvent?.Invoke();
 }

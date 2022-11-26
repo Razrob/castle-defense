@@ -15,14 +15,14 @@ public abstract class ConstructionBase : MonoBehaviour, IConstruction, ITriggera
     public event Action<ConstructionBase> OnActivityStateChange;
     public event Action<IDamagable, IDamageApplicator> OnDamageTake;
 
-    protected void Awake()
+    private void Awake()
     {
         _healthStorage = new HealthStorage(100, 100);
         _hierarchyMethodsExecutor = new ObjectHierarchyMethodsExecutor(this);
         _hierarchyMethodsExecutor.Execute(HierarchyMethodType.On_Awake);
     }
 
-    protected void Start()
+    private void Start()
     {
         if (ActivityState is ConstructionActivityState.Enabled)
         {
@@ -31,7 +31,7 @@ public abstract class ConstructionBase : MonoBehaviour, IConstruction, ITriggera
         }
     }
 
-    protected void Update()
+    private void Update()
     {
         if (ActivityState is ConstructionActivityState.Enabled)
             _hierarchyMethodsExecutor.Execute(HierarchyMethodType.On_Update);

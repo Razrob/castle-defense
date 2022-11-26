@@ -12,7 +12,8 @@ public abstract class AttackUnit : UnitBase
 
     public ConstructionBase NearestConstruction { get; private set; }
 
-    protected void OnInit()
+    [ExecuteHierarchyMethod(HierarchyMethodType.On_Awake)]
+    private void OnAwake()
     {
         _triggerBehaviour.EnterEvent += component => _closesConstructions.Add((ConstructionBase)component);
         _triggerBehaviour.ExitEvent += component => _closesConstructions.Remove((ConstructionBase)component);
