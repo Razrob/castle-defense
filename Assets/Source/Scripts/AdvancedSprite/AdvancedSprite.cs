@@ -14,6 +14,8 @@ public sealed class AdvancedSprite : MonoBehaviour
 
     private SpriteRenderer _spriteRenderer;
 
+    public SpriteRenderer AttachedSpriteRenderer => _spriteRenderer;
+
     private const string INVERSE = "_Inverse";
     private const string SATURATION = "_Saturation";
     private const string OFFCET = "_Offcet";

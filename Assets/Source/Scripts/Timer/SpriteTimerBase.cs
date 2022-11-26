@@ -9,6 +9,9 @@ public abstract class SpriteTimerBase : MonoBehaviour, IPoolable<SpriteTimerBase
     [SerializeField] private AdvancedSprite _sprite;
     [SerializeField] private Transform _dynamicArrow;
 
+    private readonly Color _startFillSpriteColor = new Color(255 / 255f, 82 / 255f, 90 / 255f, 172 / 255f);
+    private readonly Color _finalFillSpriteColor = new Color(122 / 255f, 255 / 255f, 81 / 255f, 172 / 255f);
+
     private TweenerCore<float, float, FloatOptions> _timerTweener;
 
     public TimerType Identifier => TimerType;
@@ -34,6 +37,7 @@ public abstract class SpriteTimerBase : MonoBehaviour, IPoolable<SpriteTimerBase
     {
         SetTimerActive(true);
 
+        _sprite.AttachedSpriteRenderer.color = _startFillSpriteColor;
         TimerInProcess = true;
         _sprite.Fill = 0f;
 
@@ -41,6 +45,7 @@ public abstract class SpriteTimerBase : MonoBehaviour, IPoolable<SpriteTimerBase
         _timerTweener = DOTween.To(() => 0f, 
             value => 
             { 
+                _sprite.AttachedSpriteRenderer.color = Color.Lerp(_startFillSpriteColor, _finalFillSpriteColor, value);
                 _sprite.Fill = value;
 
                 float arrowAngle = 360f * value;
@@ -51,7 +56,7 @@ public abstract class SpriteTimerBase : MonoBehaviour, IPoolable<SpriteTimerBase
             .OnComplete(StopTimer);
 
         _sprite.transform.parent.DOKill(true);
-        _sprite.transform.parent.DOPunchScale(Vector3.one * 0.3f, duration / 5f, 6);
+        _sprite.transform.parent.DOPunchScale(Vector3.one * 0.35f, Mathf.Min(Mathf.Max(1f, duration / 2f), duration), 6);
     }
 
     public void StopTimer()
