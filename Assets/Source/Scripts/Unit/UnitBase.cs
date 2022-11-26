@@ -22,7 +22,10 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ITriggerable, IDamagable
 
     public abstract UnitType UnitType { get; }
 
+    public IHealth Health => throw new NotImplementedException();
+
     public event Action<UnitBase> OnUnitDied;
+    public event Action<IDamagable, IDamageApplicator> OnDamageTake;
 
     public void TakeDamage(IDamageApplicator damageApplicator)
     {

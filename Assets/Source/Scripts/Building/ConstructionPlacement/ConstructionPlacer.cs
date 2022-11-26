@@ -58,6 +58,9 @@ public class ConstructionPlacer : CycleInitializerBase
 
     private bool TryApplyPlacement()
     {
+        if (FWC.GlobalData.ConstructionPlacementData.PlacementMode != PlacementMode.Proccess)
+            return false;
+
         if (!FWC.GlobalData.ConstructionPlacementData.CurrentPlacementInfo.PotentialPlacementPosition.HasValue)
             return false;
 
