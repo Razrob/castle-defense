@@ -17,24 +17,33 @@ MonoBehaviour:
     _price:
       _pairs:
       - _resourceID: 0
-        _value: 50
+        _value: 5
       - _resourceID: 1
-        _value: 75
+        _value: 7
   - _identifier: 20
     _price:
       _pairs:
       - _resourceID: 0
-        _value: 60
+        _value: 6
       - _resourceID: 2
-        _value: 50
+        _value: 5
       - _resourceID: 1
-        _value: 50
+        _value: 5
   - _identifier: 100
     _price:
       _pairs:
       - _resourceID: 0
-        _value: 100
+        _value: 8
       - _resourceID: 2
-        _value: 150
+        _value: 12
       - _resourceID: 1
-        _value: 75
+        _value: 7
+  - _identifier: 110
+    _price:
+      _pairs:
+      - _resourceID: 0
+        _value: 2
+      - _resourceID: 2
+        _value: 12
+      - _resourceID: 1
+        _value: 15
