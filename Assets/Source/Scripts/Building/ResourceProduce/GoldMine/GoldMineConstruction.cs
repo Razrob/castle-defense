@@ -11,6 +11,7 @@ public class GoldMineConstruction : ResourceProduceConstructionBase
 
     public override ResourceProduceCoreBase ResourceProduceCoreBase => _goldProduceCore;
     public override ConstructionID ConstructionID => ConstructionID.Gold_Mine;
+    public override ConstructionSkinBase ConstructionSkinBase => _skin;
 
     [ExecuteHierarchyMethod(HierarchyMethodType.On_Awake)]
     private void OnAwake()

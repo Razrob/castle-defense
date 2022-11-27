@@ -10,6 +10,7 @@ public class MortarAttackConstruction : AttackConstruction
     private const float _shootDelay = 2f;
     private float _lastShootTimer;
 
+    public override ConstructionSkinBase ConstructionSkinBase => _skin;
     public override ConstructionID ConstructionID => ConstructionID.Mortar;
 
     [ExecuteHierarchyMethod(HierarchyMethodType.On_Update)]

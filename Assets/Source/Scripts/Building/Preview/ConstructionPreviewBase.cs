@@ -1,2 +1,6 @@
-﻿
-public abstract class ConstructionPreviewBase : ConstructionBase { }
+﻿using System;
+
+public abstract class ConstructionPreviewBase : ConstructionBase 
+{
+    public override ConstructionSkinBase ConstructionSkinBase => throw new NotImplementedException();
+}

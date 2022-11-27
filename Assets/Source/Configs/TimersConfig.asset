@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timersPrefabs:
   - {fileID: 4855779877831417754, guid: 413b82a61da73c14289daa38938e44d0, type: 3}
+  - {fileID: 3966818842639847528, guid: bc6407f33004bf74fb1affe15af1f7a9, type: 3}

@@ -50,6 +50,11 @@ public class ResourceStorage : IReadOnlyResourceStorage
         OnResourceChange?.Invoke();
     }
 
+    public void Nullify()
+    {
+        SetValue(0f);
+    }
+
     public void SetValue(float value)
     {
         _currentValue = Mathf.Clamp(value, 0f, _capacity);

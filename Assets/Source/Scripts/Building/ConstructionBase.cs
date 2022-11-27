@@ -6,6 +6,7 @@ public abstract class ConstructionBase : MonoBehaviour, IConstruction, ITriggera
     public ConstructionLevel ConstructionLevel { get; private set; } = ConstructionLevel.Level_1;
     public ConstructionActivityState ActivityState { get; private set; } = ConstructionActivityState.Enabled;
     public abstract ConstructionID ConstructionID { get; }
+    public abstract ConstructionSkinBase ConstructionSkinBase { get; }
     public IHealth Health => _healthStorage;
 
     private HealthStorage _healthStorage;
@@ -24,7 +25,7 @@ public abstract class ConstructionBase : MonoBehaviour, IConstruction, ITriggera
 
     private void Start()
     {
-        if (ActivityState is ConstructionActivityState.Enabled)
+        if (ActivityState is ConstructionActivityState.Enabled && !_startWasCalled)
         {
             _startWasCalled = true;
             _hierarchyMethodsExecutor.Execute(HierarchyMethodType.On_Start);
@@ -44,11 +45,7 @@ public abstract class ConstructionBase : MonoBehaviour, IConstruction, ITriggera
 
         ActivityState = activityState;
 
-        if (!_startWasCalled)
-        {
-            _startWasCalled = true; 
-            _hierarchyMethodsExecutor.Execute(HierarchyMethodType.On_Start);
-        }
+        Start();
 
         OnActivityStateChange?.Invoke(this);
     }

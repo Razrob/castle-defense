@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, ITriggerable
 {
     private EntityStateMachine _stateMachine;  
     [SerializeField] private float _speed;

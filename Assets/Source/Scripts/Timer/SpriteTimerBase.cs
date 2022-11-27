@@ -14,6 +14,8 @@ public abstract class SpriteTimerBase : MonoBehaviour, IPoolable<SpriteTimerBase
 
     private TweenerCore<float, float, FloatOptions> _timerTweener;
 
+    protected virtual bool _isPoolable => true;
+
     public TimerType Identifier => TimerType;
     public abstract TimerType TimerType { get; }
     public bool TimerInProcess { get; private set; }
@@ -61,6 +63,8 @@ public abstract class SpriteTimerBase : MonoBehaviour, IPoolable<SpriteTimerBase
 
     public void StopTimer()
     {
+        SetTimerActive(false);
+
         if (!TimerInProcess)
             return;
 
@@ -68,10 +72,11 @@ public abstract class SpriteTimerBase : MonoBehaviour, IPoolable<SpriteTimerBase
         _sprite.transform.parent.DOKill(true);
 
         TimerInProcess = false;
-        SetTimerActive(false);
 
         OnComplete?.Invoke(this);
-        ElementReturnEvent?.Invoke(this);
+
+        if (_isPoolable)
+            ElementReturnEvent?.Invoke(this);
     }
 
     public void OnElementReturn()

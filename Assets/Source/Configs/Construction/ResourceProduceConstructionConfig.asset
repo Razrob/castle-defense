@@ -18,6 +18,10 @@ MonoBehaviour:
     - _targetResourceID: 0
       _producePerSecond: 20
       _producedResourceCapacity: 1000
+  _constructionInfoLevels:
+  - ConstructionID: 100
+    Info:
+    - CollectTime: 0.6
   _produceConstructions:
   - _buildingDuration: 2.5
     _skins:

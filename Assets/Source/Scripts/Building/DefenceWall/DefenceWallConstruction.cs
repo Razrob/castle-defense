@@ -6,6 +6,7 @@ public class DefenceWallConstruction : ConstructionBase, ISpecificFormConstructi
 
     public SidesPack SidesPack => _defenceWallSkin.SidesPack;
 
+    public override ConstructionSkinBase ConstructionSkinBase => _defenceWallSkin;
     public override ConstructionID ConstructionID => ConstructionID.Defence_Wall;
 
     [ExecuteHierarchyMethod(HierarchyMethodType.On_Awake)]

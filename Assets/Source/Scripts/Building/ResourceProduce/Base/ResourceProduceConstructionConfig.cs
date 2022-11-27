@@ -7,14 +7,17 @@ using UnityEngine;
 public class ResourceProduceConstructionConfig : ScriptableObject, ISingleConfig
 {
     [SerializeField] private ProduceProcessInfoLevels<ResourceProduceProccessInfo>[] _processInfoLevels;
+    [SerializeField] private ProduceConstructionInfoLevels[] _constructionInfoLevels;
     [SerializeField] private ConstructionConfiguration<ResourceProduceConstructionBase>[] _produceConstructions;
 
-    private IReadOnlyDictionary<ConstructionID, ProduceProcessInfoLevels<ResourceProduceProccessInfo>> _infoLevels;
+    private IReadOnlyDictionary<ConstructionID, ProduceProcessInfoLevels<ResourceProduceProccessInfo>> _produceInfoLevels;
+    private IReadOnlyDictionary<ConstructionID, ProduceConstructionInfoLevels> _produceConstructionInfoLevels;
     private IReadOnlyDictionary<ConstructionID, ConstructionConfiguration<ResourceProduceConstructionBase>> _constructions;
 
     private void OnEnable()
     {
-        _infoLevels = _processInfoLevels?.ToDictionary(c => c.ConstructionID, c => c);
+        _produceInfoLevels = _processInfoLevels?.ToDictionary(c => c.ConstructionID, c => c);
+        _produceConstructionInfoLevels = _constructionInfoLevels?.ToDictionary(c => c.ConstructionID, c => c);
         _constructions = _produceConstructions?.ToDictionary(c => c.ConstructionID, c => c);
     }
 
@@ -28,10 +31,18 @@ public class ResourceProduceConstructionConfig : ScriptableObject, ISingleConfig
 
     public ResourceProduceProccessInfo GetProcessInfo(ConstructionID constructionID, ConstructionLevel level)
     {
-        if (!_infoLevels.ContainsKey(constructionID))
+        if (!_produceInfoLevels.ContainsKey(constructionID))
             throw new KeyNotFoundException($"Produce process info \"{constructionID}\" \"{level}\" not found");
 
-        return _infoLevels[constructionID].Data[(int)level - 1];
+        return _produceInfoLevels[constructionID].Data[(int)level - 1];
+    }
+
+    public ProduceConstructionInfo GetConstructionInfo(ConstructionID constructionID, ConstructionLevel level)
+    {
+        if (!_produceConstructionInfoLevels.ContainsKey(constructionID))
+            throw new KeyNotFoundException($"Produce process info \"{constructionID}\" \"{level}\" not found");
+
+        return _produceConstructionInfoLevels[constructionID].Info[(int)level - 1];
     }
 
 
@@ -40,6 +51,20 @@ public class ResourceProduceConstructionConfig : ScriptableObject, ISingleConfig
     {
         public ConstructionID ConstructionID;
         public TProcessInfo[] Data;
+    }
+    
+
+    [Serializable]
+    public struct ProduceConstructionInfoLevels
+    {
+        public ConstructionID ConstructionID;
+        public ProduceConstructionInfo[] Info;
+    }
+
+    [Serializable]
+    public struct ProduceConstructionInfo
+    {
+        public float CollectTime;
     }
 }
 
