@@ -36,7 +36,11 @@ public struct ConstructionConfiguration<TConstruction> : ISerializationCallbackR
 
     public void OnAfterDeserialize()
     {
-        InitSkins();
+        try
+        {
+            InitSkins();
+        }
+        catch { }
     }
 
     public void OnBeforeSerialize() { }

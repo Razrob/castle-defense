@@ -1,2 +1,2 @@
 ﻿
-public abstract class ConstructionPreviewBase : ConstructionBase{ }
+public abstract class ConstructionPreviewBase : ConstructionBase { }

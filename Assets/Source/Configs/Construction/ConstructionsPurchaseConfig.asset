@@ -29,3 +29,12 @@ MonoBehaviour:
         _value: 50
       - _resourceID: 1
         _value: 50
+  - _identifier: 100
+    _price:
+      _pairs:
+      - _resourceID: 0
+        _value: 100
+      - _resourceID: 2
+        _value: 150
+      - _resourceID: 1
+        _value: 75

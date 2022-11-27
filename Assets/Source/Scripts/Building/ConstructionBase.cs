@@ -58,4 +58,9 @@ public abstract class ConstructionBase : MonoBehaviour, IConstruction, ITriggera
         _healthStorage.ChangeValue(-damageApplicator.Damage);
         OnDamageTake?.Invoke(this, damageApplicator);
     }
+
+    public void Upgrade()
+    {
+
+    }
 }

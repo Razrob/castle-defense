@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df3b6fff66e95af43b07a0c88c0f48e1, type: 3}
+  m_Name: ResourceProduceConstructionConfig
+  m_EditorClassIdentifier: 
+  _processInfoLevels:
+  - ConstructionID: 100
+    Data:
+    - _targetResourceID: 0
+      _producePerSecond: 20
+      _producedResourceCapacity: 1000
+  _produceConstructions:
+  - _buildingDuration: 2.5
+    _skins:
+    - {fileID: 3047265648652594083, guid: 2771f80170bf85040b664274283fdf08, type: 3}
+    _buildingsSkins: []
+    ConstructionPrefab: {fileID: 6980801588387424534, guid: 78088cd2e537a7643907284e9c2e72a4, type: 3}
+    Preview: {fileID: 1999006115931122857, guid: 79d205c0676f53b47a62fdf20f4160d2, type: 3}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
