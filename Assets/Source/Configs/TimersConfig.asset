@@ -15,3 +15,5 @@ MonoBehaviour:
   _timersPrefabs:
   - {fileID: 4855779877831417754, guid: 413b82a61da73c14289daa38938e44d0, type: 3}
   - {fileID: 3966818842639847528, guid: bc6407f33004bf74fb1affe15af1f7a9, type: 3}
+  - {fileID: 3729615215760843277, guid: 03bbbc2a5d5cc384586a72983793cb35, type: 3}
+  - {fileID: 3679451767950412831, guid: b6062502de021ae4db198deb30c26c88, type: 3}

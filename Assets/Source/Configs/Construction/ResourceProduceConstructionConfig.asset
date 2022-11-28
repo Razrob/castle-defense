@@ -23,11 +23,19 @@ MonoBehaviour:
     - _targetResourceID: 1
       _producePerSecond: 1
       _producedResourceCapacity: 25
+  - ConstructionID: 120
+    Data:
+    - _targetResourceID: 2
+      _producePerSecond: 1
+      _producedResourceCapacity: 30
   _constructionInfoLevels:
   - ConstructionID: 100
     Info:
     - CollectTime: 0.6
   - ConstructionID: 110
+    Info:
+    - CollectTime: 0.6
+  - ConstructionID: 120
     Info:
     - CollectTime: 0.6
   _produceConstructions:
@@ -44,4 +52,11 @@ MonoBehaviour:
     _buildingsSkins: []
     ConstructionPrefab: {fileID: 7258360261867536026, guid: 30d8670d260e3ec40a2b0f882ccece50, type: 3}
     Preview: {fileID: 7411061730954950187, guid: 31e15f013a2ab664990fe14dc35227b5, type: 3}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
+  - _buildingDuration: 2.5
+    _skins:
+    - {fileID: 2460871056519468514, guid: 157f31081180da7478dabe43c1f85ab9, type: 3}
+    _buildingsSkins: []
+    ConstructionPrefab: {fileID: 1956823540426450879, guid: 04732c8ba80bfb445ab7747db6322b8f, type: 3}
+    Preview: {fileID: 5639726837892126405, guid: b6e18046217d1c8459f8d913f8e80c9e, type: 3}
     Rotation: {x: 0, y: 0, z: 0, w: 0}

@@ -30,6 +30,7 @@ public abstract class ResourceProduceConstructionBase : ConstructionBase
         _collectTriggerBehaviour.ExitEvent += triggerable => OnResourceCollectAbort(triggerable.Cast<Player>());
 
         _processPanel.SetActive(true);
+        RefreshProducePanel();
     }
 
     private void OnResourceCollectStart(Player player) 
