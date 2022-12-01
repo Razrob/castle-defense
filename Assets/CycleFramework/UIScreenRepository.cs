@@ -9,6 +9,8 @@ public class UIScreenRepository : MonoBehaviour
 
     private static UIScreenRepository _instance;
 
+    public static IReadOnlyDictionary<Type, UIScreen> Screens => _instance._screens;
+
     private void Awake()
     {
         if (_instance != null )
