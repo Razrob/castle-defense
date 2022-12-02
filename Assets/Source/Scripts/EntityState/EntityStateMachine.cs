@@ -2,13 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public enum EntityStateID
-{
-    Move,
-    Build,
-    Attack
-};
-
 public class EntityStateMachine
 {
     private readonly Dictionary<EntityStateID, EntityStateBase> _states;
