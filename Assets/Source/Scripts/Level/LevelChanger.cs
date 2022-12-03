@@ -7,6 +7,6 @@ public class LevelChanger : CycleInitializerBase
 
     protected override void OnInit()
     {
-
+        FWC.GlobalData.LevelProgressData.StartNextLevel(_levelsCollection.Levels[0]);
     }
 }

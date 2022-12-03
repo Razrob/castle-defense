@@ -7,6 +7,8 @@ public class WarrionAttackUnit : AttackUnit
     private ConstructionsRepository _constructionsRepository;
     private AttackUnitsMoveState _moveState;
 
+    public override UnitID UnitID => UnitID.Warrior;
+
     [ExecuteHierarchyMethod(HierarchyMethodType.On_Awake)]
     private void OnAwake()
     { 

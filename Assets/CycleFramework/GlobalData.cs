@@ -11,9 +11,11 @@ public class GlobalData
     public CameraPresetsChangeData CameraPresetsChangeData;
     public ConstructionPlacementData ConstructionPlacementData;
     public SpecificFormConstructionTransformer FormConstructionTransformer;
+    public LevelProgressData LevelProgressData;
 
     public Pool<Projectile, ProjectileShape> ProjectilesPool;
     public Pool<SpriteTimerBase, TimerType> TimersPool;
+    public Pool<UnitBase, UnitID> UnitsPool;
 
     public GlobalData()
     {
@@ -24,5 +26,6 @@ public class GlobalData
         CameraPresetsChangeData = new CameraPresetsChangeData();
         ConstructionPlacementData = new ConstructionPlacementData();
         FormConstructionTransformer = new SpecificFormConstructionTransformer(ConstructionsRepository);
+        LevelProgressData = new LevelProgressData();
     }
 }

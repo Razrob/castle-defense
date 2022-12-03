@@ -6,5 +6,8 @@ public class FactoriesInstaller : MonoInstaller
     {
         IConstructionFactory constructionFactory = FindObjectOfType<ConstructionFactory>(true);
         Container.BindInstance(constructionFactory).AsSingle();
+
+        IUnitFactory unitFactory = FindObjectOfType<UnitFactory>(true);
+        Container.BindInstance(unitFactory).AsSingle();
     }
 }

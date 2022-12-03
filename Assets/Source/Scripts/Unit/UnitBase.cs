@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class UnitBase : MonoBehaviour, IUnit, ITriggerable, IDamagable
+public abstract class UnitBase : MonoBehaviour, IUnit, ITriggerable, IDamagable, IPoolable<UnitBase, UnitID>
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private NavMeshAgent _navMeshAgent;
@@ -20,11 +20,17 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ITriggerable, IDamagable
     public bool IsDied => _healthStorage.CurrentValue < 1f;
 
     public abstract UnitType UnitType { get; }
+    public abstract UnitID UnitID { get; }
 
     public IHealth Health => throw new NotImplementedException();
 
+    public UnitID Identifier => throw new NotImplementedException();
+
     public event Action<UnitBase> OnUnitDied;
     public event Action<IDamagable, IDamageApplicator> OnDamageTake;
+
+    public event Action<UnitBase> ElementReturnEvent;
+    public event Action<UnitBase> ElementDestroyEvent;
 
     private void Awake()
     {
