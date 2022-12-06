@@ -3,9 +3,11 @@
 public class DefenceWallConstruction : ConstructionBase, ISpecificFormConstruction
 {
     [SerializeField] private DefenceWallSkin _defenceWallSkin;
+    [SerializeField] private DefaultHealthBar _healthBar;
+
+    protected override HealthBarBase _healthBarBase => _healthBar;
 
     public SidesPack SidesPack => _defenceWallSkin.SidesPack;
-
     public override ConstructionSkinBase ConstructionSkinBase => _defenceWallSkin;
     public override ConstructionID ConstructionID => ConstructionID.Defence_Wall;
 

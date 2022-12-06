@@ -5,9 +5,12 @@ using UnityEngine;
 public class WoodMineConstruction : ResourceProduceConstructionBase
 {
     [SerializeField] private WoodMineConstructionSkin _skin;
+    [SerializeField] private DefaultHealthBar _healthBar;
 
     private ResourceProduceCore _stoneProduceCore;
     private ResourceProduceConstructionConfig _produceConstructionConfig;
+
+    protected override HealthBarBase _healthBarBase => _healthBar;
 
     public override ResourceProduceCoreBase ResourceProduceCoreBase => _stoneProduceCore;
     public override ConstructionID ConstructionID => ConstructionID.Wood_Mine;

@@ -27,6 +27,7 @@ public class ResourceStorage : IReadOnlyResourceStorage
     public event Action<float> OnResourceAdd;
     public event Action<float> OnResourceRemove;
     public event Action OnCapacityChange;
+    public event Action OnStateChange;
 
     public ResourceStorage(float currentValue, float capacity)
     {
@@ -48,6 +49,7 @@ public class ResourceStorage : IReadOnlyResourceStorage
             OnResourceRemove?.Invoke(oldValue - _currentValue);
 
         OnResourceChange?.Invoke();
+        OnStateChange?.Invoke();
     }
 
     public void Nullify()
@@ -59,6 +61,7 @@ public class ResourceStorage : IReadOnlyResourceStorage
     {
         _currentValue = Mathf.Clamp(value, 0f, _capacity);
         OnResourceChange?.Invoke();
+        OnStateChange?.Invoke();
     }
 
     public void SetCapacity(float value)

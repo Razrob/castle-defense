@@ -9,6 +9,8 @@ public abstract class ConstructionBase : MonoBehaviour, IConstruction, ITriggera
     public abstract ConstructionSkinBase ConstructionSkinBase { get; }
     public IHealth Health => _healthStorage;
 
+    protected abstract HealthBarBase _healthBarBase { get; }
+
     private HealthStorage _healthStorage;
     private ObjectHierarchyMethodsExecutor _hierarchyMethodsExecutor;
     private bool _startWasCalled;
@@ -30,12 +32,20 @@ public abstract class ConstructionBase : MonoBehaviour, IConstruction, ITriggera
             _startWasCalled = true;
             _hierarchyMethodsExecutor.Execute(HierarchyMethodType.On_Start);
         }
+
+        _healthStorage.OnStateChange += OnHealthChange;
+        OnHealthChange();
     }
 
     private void Update()
     {
         if (ActivityState is ConstructionActivityState.Enabled)
             _hierarchyMethodsExecutor.Execute(HierarchyMethodType.On_Update);
+    }
+
+    private void OnHealthChange()
+    {
+        _healthBarBase?.SetFill(_healthStorage.CurrentValue / _healthStorage.Capacity);
     }
 
     public void SetActivityState(ConstructionActivityState activityState)

@@ -5,9 +5,12 @@ using UnityEngine;
 public class GoldMineConstruction : ResourceProduceConstructionBase
 {
     [SerializeField] private GoldMineConstructionSkin _skin;
+    [SerializeField] private DefaultHealthBar _healthBar;
 
     private ResourceProduceCore _goldProduceCore;
     private ResourceProduceConstructionConfig _produceConstructionConfig;
+
+    protected override HealthBarBase _healthBarBase => _healthBar;
 
     public override ResourceProduceCoreBase ResourceProduceCoreBase => _goldProduceCore;
     public override ConstructionID ConstructionID => ConstructionID.Gold_Mine;

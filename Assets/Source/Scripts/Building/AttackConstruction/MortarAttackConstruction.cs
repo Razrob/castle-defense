@@ -5,10 +5,13 @@ using Random = UnityEngine.Random;
 public class MortarAttackConstruction : AttackConstruction
 {
     [SerializeField] private MortarConstructionSkin _skin;
+    [SerializeField] private DefaultHealthBar _healthBar;
 
     private const float _angle = 55f;
     private const float _shootDelay = 2f;
     private float _lastShootTimer;
+
+    protected override HealthBarBase _healthBarBase => _healthBar;
 
     public override ConstructionSkinBase ConstructionSkinBase => _skin;
     public override ConstructionID ConstructionID => ConstructionID.Mortar;
