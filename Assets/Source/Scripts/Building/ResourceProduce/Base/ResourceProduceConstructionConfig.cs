@@ -16,9 +16,13 @@ public class ResourceProduceConstructionConfig : ScriptableObject, ISingleConfig
 
     private void OnEnable()
     {
-        _produceInfoLevels = _processInfoLevels?.ToDictionary(c => c.ConstructionID, c => c);
-        _produceConstructionInfoLevels = _constructionInfoLevels?.ToDictionary(c => c.ConstructionID, c => c);
-        _constructions = _produceConstructions?.ToDictionary(c => c.ConstructionID, c => c);
+        try
+        {
+            _produceInfoLevels = _processInfoLevels?.ToDictionary(c => c.ConstructionID, c => c);
+            _produceConstructionInfoLevels = _constructionInfoLevels?.ToDictionary(c => c.ConstructionID, c => c);
+            _constructions = _produceConstructions?.ToDictionary(c => c.ConstructionID, c => c);
+        }
+        catch { }
     }
 
     public ConstructionConfiguration<ResourceProduceConstructionBase> GetConfiguration(ConstructionID constructionID)
