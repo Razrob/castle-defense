@@ -1,3 +1,6 @@
+using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +20,9 @@ public class AttackUnitsMoveState : UnitMoveStateBase
     private CostructionPathInfo _costructionPathInfo;
     public CostructionPathInfo CostructionPathInfo => _costructionPathInfo;
 
-    public AttackUnitsMoveState(AttackUnit attackUnit)
+    private const int MOVE_LAYER_INDEX = 0;
+
+    public AttackUnitsMoveState(AttackUnit attackUnit) : base(attackUnit.Animator) 
     {
         _unit = attackUnit;
         _animator = attackUnit.Animator;
@@ -25,9 +30,13 @@ public class AttackUnitsMoveState : UnitMoveStateBase
 
     public override void OnStateEnter()
     {
-        _animator.SetLayerWeight(1, 1);
-        //_animator.Play("Movement");
+        _animator.SetLayerWeight(MOVE_LAYER_INDEX, 1f);
         _constructionsRepository = FWC.GlobalData.ConstructionsRepository;
+    }
+
+    public override void OnStateExit()
+    {
+        _animator.SetLayerWeight(MOVE_LAYER_INDEX, 0f);
     }
 
     public override void OnUpdate() { }
@@ -37,8 +46,6 @@ public class AttackUnitsMoveState : UnitMoveStateBase
         FindTarget();
         _animator.SetFloat("MoveSpeed", _velocity.magnitude);
     }
-
-    public override void OnStateExit() { }
 
     private void FindTarget()
     {

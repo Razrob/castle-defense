@@ -16,8 +16,10 @@ public struct CostructionPathInfo
     }
 }
 
-public abstract class UnitMoveStateBase : EntityStateBase
+public abstract class UnitMoveStateBase : UnitEntityStateBase
 {
+    public UnitMoveStateBase(Animator animator) : base(animator) { }
+
     protected bool PathIsValid(Vector3 objectPosition, Vector3 targetPosition, NavMeshPath path)
     {
         NavMesh.CalculatePath(objectPosition, targetPosition, NavMesh.AllAreas, path);
