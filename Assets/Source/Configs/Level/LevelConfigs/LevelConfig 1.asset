@@ -9,8 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9746d1db90e342489afab56d35e85f2, type: 3}
-  m_Name: UnitConfig
+  m_Script: {fileID: 11500000, guid: 41aadd6665249824b8acfbd58cd051d6, type: 3}
+  m_Name: LevelConfig 1
   m_EditorClassIdentifier: 
-  _prefabs:
-  - _unit: {fileID: 8996297321160148895, guid: 9530a6a1cd7481b4cb3bfc3a15ea0932, type: 3}
+  _attackIterations:
+  - _parts:
+    - UnitID: 0
+      Count: 2
+      SpawnInterval: 3
+      FinalDelay: 4
+  - _parts:
+    - UnitID: 0
+      Count: 5
+      SpawnInterval: 4
+      FinalDelay: 0

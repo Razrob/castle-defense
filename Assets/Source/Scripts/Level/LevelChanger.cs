@@ -25,7 +25,7 @@ public class LevelChanger : CycleInitializerBase
         Sequence sequence = DOTween.Sequence();
         sequence.AppendInterval(LevelChangeScreen.LABEL_ACTIVE_CHANGE_DURATION + LABEL_VISIBLE_DURATION);
         sequence.AppendCallback(() => _levelChangeScreen.SetLabelActive(false));
-        sequence.AppendCallback(() => FWC.GlobalData.LevelProgressData.StartNextLevel(_levelsCollection.Levels[0]));
+        sequence.AppendCallback(() => FWC.GlobalData.LevelProgressData.StartNextLevel(_levelsCollection.Levels[levelIndex]));
     }
 
     private void OnLevelComplete()

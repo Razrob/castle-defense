@@ -30,7 +30,7 @@ public class LevelChangeScreen : UIScreen
 
         float targetAlfa = Convert.ToSingle(value);
         _labelActiveChangeTweener = 
-            DOTween.To(() => _labelCanvasGroup.alpha, value => _labelCanvasGroup.alpha = value, LABEL_ACTIVE_CHANGE_DURATION, targetAlfa)
+            DOTween.To(() => _labelCanvasGroup.alpha, value => _labelCanvasGroup.alpha = value, targetAlfa, LABEL_ACTIVE_CHANGE_DURATION)
             .SetEase(Ease.Linear)
             .OnComplete(() => callback?.Invoke());
     }

@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: GameLevelsCollectionConfig
   m_EditorClassIdentifier: 
   _levels:
+  - {fileID: 11400000, guid: 151c9192283de914fb78185e91de0498, type: 2}
   - {fileID: 11400000, guid: 0c9536a6c2bfe244e8f51a3a4a9812d0, type: 2}
+  - {fileID: 11400000, guid: 6ba804f548a4ed24ea2b6aa90790742c, type: 2}

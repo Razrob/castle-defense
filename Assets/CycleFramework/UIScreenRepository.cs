@@ -9,29 +9,37 @@ public class UIScreenRepository : MonoBehaviour
 
     private static UIScreenRepository _instance;
 
-    public static IReadOnlyDictionary<Type, UIScreen> Screens => _instance._screens;
-
-    private void Awake()
+    public static UIScreenRepository Instance
     {
-        if (_instance != null )
+        get
         {
-            Destroy(this);
-            return;
-        }
+            if (_instance is null)
+                Init();
 
-        _instance = this;
-        _screens = new Dictionary<Type, UIScreen>();
+            return _instance;
+        }
+    }
+
+    public static IReadOnlyDictionary<Type, UIScreen> Screens => Instance._screens;
+
+    private static void Init()
+    {
+        if (_instance != null)
+            return;
+
+        _instance = FindObjectOfType<UIScreenRepository>();
+        Instance._screens = new Dictionary<Type, UIScreen>();
 
         foreach (UIScreen screen in FindObjectsOfType<UIScreen>(true))
-            _screens.Add(screen.GetType(), screen); 
+            Instance._screens.Add(screen.GetType(), screen);
     }
 
     public static TScreen GetScreen<TScreen>() where TScreen : UIScreen
     {
-        if (_instance is null)
+        if (Instance is null)
             throw new NullReferenceException($"Instance is null");
 
-        if (_instance._screens.TryGetValue(typeof(TScreen), out UIScreen screen))
+        if (Instance._screens.TryGetValue(typeof(TScreen), out UIScreen screen))
             return (TScreen)screen;
 
         return default;

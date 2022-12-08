@@ -56,7 +56,6 @@ public class AttackIterationsSpawner : CycleInitializerBase
         Vector3 position = _attackLinesConfig.AttackLines[Random.Range(0, _attackLinesConfig.AttackLines.Count)].StartPosition;
         UnitBase unit = FWC.GlobalData.UnitsPool.ExtractElement(unitID);
         unit.transform.position = position;
-
         FWC.GlobalData.UnitRepository.AddUnit(unit);
     }
 }

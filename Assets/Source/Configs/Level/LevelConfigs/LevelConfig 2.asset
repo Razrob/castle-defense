@@ -10,6 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41aadd6665249824b8acfbd58cd051d6, type: 3}
-  m_Name: 1_LevelConfig
+  m_Name: LevelConfig 2
   m_EditorClassIdentifier: 
-  _attackIterations: []
+  _attackIterations:
+  - _parts:
+    - UnitID: 0
+      Count: 4
+      SpawnInterval: 3
+      FinalDelay: 4
+  - _parts:
+    - UnitID: 0
+      Count: 8
+      SpawnInterval: 4
+      FinalDelay: 0

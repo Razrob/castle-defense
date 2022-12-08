@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dfd986efd4733e4ca3caf349886e906, type: 3}
   m_Name: AttackLinesConfig
   m_EditorClassIdentifier: 
-  _attackLines: []
+  _startPosition: {x: 8, y: 0, z: -4}
+  _nextPointOffcet: {x: 0, y: 0, z: 1}
+  _lineDirection: {x: -1, y: 0, z: 0}
+  _linesCount: 9

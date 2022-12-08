@@ -13,7 +13,13 @@ public class WarrionAttackUnit : AttackUnit
     private void OnAwake()
     { 
         _constructionsRepository = FWC.GlobalData.ConstructionsRepository;
-        _stateMachine = new EntityStateMachine(new EntityStateBase[] { new AttackUnitsMoveState(this), new AttackUnitsAttackState(this) }, EntityStateID.Move);
+        _stateMachine = new EntityStateMachine(new EntityStateBase[] 
+        { 
+            new AttackUnitsMoveState(this), 
+            new AttackUnitsAttackState(this) 
+        }, 
+        EntityStateID.Move);
+
         _moveState = _stateMachine.GetState<AttackUnitsMoveState>(EntityStateID.Move);
     }
 
