@@ -35,7 +35,7 @@ public class AttackIterationsSpawner : CycleInitializerBase
         {
             for (int unitIndex = 0; unitIndex < iterationPart.Count; unitIndex++)
             {
-                sequence.AppendCallback(() => SpawnUnit(iterationPart.UnitID));
+                sequence.AppendCallback(() => SpawnUnit(iterationPart.UnitID, newAttackIterationIndex));
                 sequence.AppendInterval(iterationPart.SpawnInterval);
             }
 
@@ -51,11 +51,13 @@ public class AttackIterationsSpawner : CycleInitializerBase
         });
     }
 
-    private void SpawnUnit(UnitID unitID)
+    private void SpawnUnit(UnitID unitID, int iterationIndex)
     {
         Vector3 position = _attackLinesConfig.AttackLines[Random.Range(0, _attackLinesConfig.AttackLines.Count)].StartPosition;
         UnitBase unit = FWC.GlobalData.UnitsPool.ExtractElement(unitID);
         unit.transform.position = position;
+
         FWC.GlobalData.UnitRepository.AddUnit(unit);
+        _levelProgressData.ActiveLevelInfo.IterationUnitsProcessor.AddUnit(unit, iterationIndex);
     }
 }

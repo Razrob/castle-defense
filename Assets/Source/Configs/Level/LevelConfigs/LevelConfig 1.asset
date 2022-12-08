@@ -20,6 +20,6 @@ MonoBehaviour:
       FinalDelay: 4
   - _parts:
     - UnitID: 0
-      Count: 5
+      Count: 3
       SpawnInterval: 4
       FinalDelay: 0
