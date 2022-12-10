@@ -34,7 +34,6 @@ public abstract class ConstructionBase : MonoBehaviour, IConstruction, ITriggera
         }
 
         _healthStorage.OnStateChange += OnHealthChange;
-        OnHealthChange();
     }
 
     private void Update()

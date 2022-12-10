@@ -18,6 +18,7 @@ public abstract class HealthBarBase : MonoBehaviour
     private void Awake()
     {
         _childSpriteRenderers = GetComponentsInChildren<SpriteRenderer>(true);
+        SetAlfaInternal(0f);
     }
 
     private void SetAlfaInternal(float alfa)
@@ -28,11 +29,21 @@ public abstract class HealthBarBase : MonoBehaviour
             spriteRenderer.color = spriteRenderer.color.SetAlfa(alfa);
     }
 
-    public virtual void SetFill(float value)
+    public virtual void SetFill(float value, bool changeAlfa = true)
     {
         _fillSprite.Fill = value;
 
+        if (!changeAlfa)
+            return;
+
         _visibleChangeSequence?.Kill();
+
+        if (value < 0.01f)
+        {
+            SetAlfaInternal(0f);
+            return;
+        }
+
         _visibleChangeSequence = DOTween.Sequence();
 
         _visibleChangeSequence.Append(DOTween.To(() => _barAlfa, alfa => SetAlfaInternal(alfa), 1f, BAR_VISIBLE_CHANGE_DURATION));

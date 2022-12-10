@@ -1,4 +1,5 @@
 ﻿public enum ProjectileShape
 {
-    Sphere_Shape,
+    Mortar_Projectile = 0,
+    Gun_Projectile = 10,
 }

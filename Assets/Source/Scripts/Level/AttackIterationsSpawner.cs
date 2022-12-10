@@ -44,6 +44,9 @@ public class AttackIterationsSpawner : CycleInitializerBase
 
         sequence.OnComplete(() =>
         {
+            if (!_levelProgressData.LevelIsActive)
+                return;
+
             if (_levelProgressData.ActiveLevelInfo.IterationUnitsProcessor.ActiveUnitsDied())
                 SpawnNextAttackIteration();
             else

@@ -3,6 +3,6 @@
     public abstract EntityStateID EntityStateID { get; }
     public abstract void OnStateEnter();
     public abstract void OnStateExit();
-    public abstract void OnUpdate();
-    public abstract void OnFixedUpdate();
+    public virtual void OnUpdate() { }
+    public virtual void OnFixedUpdate() { }
 }

@@ -7,6 +7,6 @@ public interface IUnit
     public IHealth Health { get; }
     public bool IsDied { get; }
 
-    public event Action<UnitBase> OnUnitDied;
+    public event Action<UnitBase, IDamageApplicator> OnUnitDied;
     public event Action<IDamagable, IDamageApplicator> OnDamageTake;
 }

@@ -26,6 +26,20 @@ public class LevelChanger : CycleInitializerBase
         sequence.AppendInterval(LevelChangeScreen.LABEL_ACTIVE_CHANGE_DURATION + LABEL_VISIBLE_DURATION);
         sequence.AppendCallback(() => _levelChangeScreen.SetLabelActive(false));
         sequence.AppendCallback(() => FWC.GlobalData.LevelProgressData.StartNextLevel(_levelsCollection.Levels[levelIndex]));
+        sequence.AppendInterval(LevelChangeScreen.LABEL_ACTIVE_CHANGE_DURATION);
+
+        sequence.AppendCallback(() =>
+        {
+            if (FWC.GlobalData.LevelProgressData.ActiveLevelInfo.IterationUnitsProcessor.AllUnitsOnLevelDied())
+            {
+                FWC.GlobalData.LevelProgressData.CompleteLevel();
+            }
+            else
+            {
+                FWC.GlobalData.LevelProgressData.ActiveLevelInfo.IterationUnitsProcessor
+                    .OnAllUnitsOnLevelDied += () => FWC.GlobalData.LevelProgressData.CompleteLevel();
+            }
+        });
     }
 
     private void OnLevelComplete()

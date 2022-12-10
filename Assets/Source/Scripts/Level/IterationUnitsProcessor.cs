@@ -4,7 +4,7 @@ using System.Linq;
 
 public class IterationUnitsProcessor
 {
-    private readonly List<IUnit> _activeUnits;
+    private readonly List<IUnit> _units;
     private readonly LevelConfig _levelConfig;
 
     public int AttackIterationIndex { get; private set; }
@@ -14,7 +14,7 @@ public class IterationUnitsProcessor
     
     public IterationUnitsProcessor(LevelConfig levelConfig)
     {
-        _activeUnits = new List<IUnit>();
+        _units = new List<IUnit>();
         _levelConfig = levelConfig;
 
         AttackIterationIndex = -1;
@@ -27,17 +27,16 @@ public class IterationUnitsProcessor
 
         AttackIterationIndex = unitAttackIterationIndex;
 
-        _activeUnits.Add(unit);
+        _units.Add(unit);
         unit.OnUnitDied += OnUnitDied;
     }
 
-    public bool ActiveUnitsDied() => _activeUnits.All(unit => unit.IsDied);
-    public bool AllUnitsOnLevelDied() => _levelConfig.CommonUnitsCount <= _activeUnits.Count(unit => unit.IsDied);
+    public bool ActiveUnitsDied() => _units.All(unit => unit.IsDied);
+    public bool AllUnitsOnLevelDied() => _levelConfig.CommonUnitsCount <= _units.Count(unit => unit.IsDied);
 
-    private void OnUnitDied(UnitBase unit)
+    private void OnUnitDied(UnitBase unit, IDamageApplicator damageApplicator)
     {
         unit.OnUnitDied -= OnUnitDied;
-        _activeUnits.Remove(unit);
 
         if (ActiveUnitsDied())
             OnActiveUnitsDied?.Invoke();

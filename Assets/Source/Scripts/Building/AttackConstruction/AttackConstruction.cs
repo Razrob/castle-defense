@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public abstract class AttackConstruction : ConstructionBase
 {
@@ -25,7 +26,9 @@ public abstract class AttackConstruction : ConstructionBase
 
     private void RefreshNearestUnit()
     {
-        NearestUnit = ClosestUnits.FindMin((last, next) => Vector3.Distance(transform.position, last.transform.position) >
-            Vector3.Distance(transform.position, next.transform.position));
+        NearestUnit = ClosestUnits
+            .Where(unit => !unit.IsDied)
+            .FindMin((last, next) => Vector3.Distance(transform.position, last.transform.position) >
+                Vector3.Distance(transform.position, next.transform.position));
     }
 }

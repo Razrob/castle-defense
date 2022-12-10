@@ -8,6 +8,7 @@ public class LevelProgressData
 
     public int CompletedLevelsCount => _completedLevelsCount;
     public LevelInfo ActiveLevelInfo { get; private set; }
+    public bool LevelIsActive => ActiveLevelInfo != null;
 
     public event Action OnLevelComplete;
     public event Action OnLevelStart;

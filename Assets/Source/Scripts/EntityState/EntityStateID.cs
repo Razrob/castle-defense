@@ -1,6 +1,7 @@
 ﻿public enum EntityStateID
 {
-    Move,
-    Build,
-    Attack
+    Move = 0,
+    Build = 1,
+    Attack = 2,
+    Die = 3,
 };

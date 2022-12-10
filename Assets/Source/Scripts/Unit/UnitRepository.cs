@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 public interface IUnitRepository
 {
-    public event Action<UnitBase> OnUnitAdd;
-    public event Action<UnitBase> OnUnitRemove;
-
     public IReadOnlyDictionary<UnitType, List<UnitBase>> Units { get; }
+
     public void AddUnit(UnitBase unit);
     public TUnit TryGetUnit<TUnit>(UnitType unitType, Predicate<TUnit> predicate = null, bool remove = false) where TUnit : UnitBase;
+
+    public event Action<UnitBase> OnUnitAdd;
+    public event Action<UnitBase> OnUnitRemove;
+    public event Action<UnitBase> OnUnitDied;
 }
 
 public class UnitRepository : IUnitRepository
@@ -18,6 +21,7 @@ public class UnitRepository : IUnitRepository
 
     public event Action<UnitBase> OnUnitAdd;
     public event Action<UnitBase> OnUnitRemove;
+    public event Action<UnitBase> OnUnitDied;
 
     public UnitRepository()
     {
@@ -30,6 +34,7 @@ public class UnitRepository : IUnitRepository
             _units.Add(unit.UnitType, new List<UnitBase>(5));
 
         _units[unit.UnitType].Add(unit);
+        unit.OnUnitDied += UnitDied;
     }
 
     public TUnit TryGetUnit<TUnit>(UnitType unitType, Predicate<TUnit> predicate = null, bool remove = false) where TUnit : UnitBase
@@ -45,9 +50,19 @@ public class UnitRepository : IUnitRepository
         TUnit unit = units[index].Cast<TUnit>();
 
         if (remove)
+        {
+            units[index].OnUnitDied -= UnitDied;
             units.RemoveAt(index);
+            OnUnitRemove?.Invoke(unit);
+        }
 
         return unit;
+    }
+
+    private void UnitDied(UnitBase unit, IDamageApplicator damageApplicator)
+    {
+        unit.OnUnitDied -= UnitDied;
+        OnUnitDied(unit);
     }
 }
 

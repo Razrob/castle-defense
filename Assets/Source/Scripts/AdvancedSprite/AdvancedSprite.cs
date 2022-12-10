@@ -13,6 +13,7 @@ public sealed class AdvancedSprite : MonoBehaviour
     [SerializeField] [Range(0f, 1f)] private float _fill = 1f;
 
     private SpriteRenderer _spriteRenderer;
+    private bool _materialInstantiated;
 
     public SpriteRenderer AttachedSpriteRenderer => _spriteRenderer;
 
@@ -80,12 +81,23 @@ public sealed class AdvancedSprite : MonoBehaviour
     private void Awake() 
     {
         CheckSpriteRenderer();
+        CheckMaterialInstancing();
         RefreshShaderParameters();
     }
 
     private void OnValidate() 
     {
-        RefreshShaderParameters();   
+        CheckMaterialInstancing();
+        RefreshShaderParameters();
+    }
+
+    private void CheckMaterialInstancing()
+    {
+        if (!_materialInstantiated && Application.isPlaying)
+        {
+            _materialInstantiated = true;
+            _spriteRenderer.material = Instantiate(_spriteRenderer.sharedMaterial);
+        }
     }
 
     private void CheckSpriteRenderer()
