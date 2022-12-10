@@ -5,6 +5,7 @@ Shader "Sprites/AdvancedSprite"
 	{
 		[PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
         [Toggle] _Inverse("Inverse", int) = 0
+        _Color("Color", Color) = (1, 1, 1, 1)
         _Saturation("Saturation", Range(0.0, 1.0)) = 1
         _Offcet("Offcet", Range(0.0, 1.0)) = 0
         _RadialFill("RadialFill", Range(0.0, 1.0)) = 1

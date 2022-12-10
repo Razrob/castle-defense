@@ -17,7 +17,6 @@ public class DiedUnitsRemover : CycleInitializerBase
 
     private void RemoveUnit(UnitBase unit)
     {
-        //Destroy(unit.gameObject);
-        unit.Return();
+        unit.SetAlfa(0f, 2f, () => unit.Return());
     }
 }

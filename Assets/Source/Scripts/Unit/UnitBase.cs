@@ -1,4 +1,9 @@
+using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,6 +16,9 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ITriggerable, IDamagable,
     [SerializeField] private DefaultHealthBar _healthBar;
 
     private ObjectHierarchyMethodsExecutor _hierarchyMethodsExecutor;
+    private IReadOnlyCollection<Renderer> _childRenderers;
+
+    private TweenerCore<float, float, FloatOptions> _lastAlfaChangeTweener;
 
     protected HealthStorage _healthStorage;
     protected EntityStateMachine _stateMachine;
@@ -28,6 +36,7 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ITriggerable, IDamagable,
     public IHealth Health => throw new NotImplementedException();
     public UnitID Identifier => UnitID;
     public IDamageApplicator LastDamageApplicator { get; private set; }
+    public float CurrentAlfa { get; private set; }
 
     public event Action<UnitBase, IDamageApplicator> OnUnitDied;
     public event Action<IDamagable, IDamageApplicator> OnDamageTake;
@@ -38,6 +47,9 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ITriggerable, IDamagable,
     private void Awake()
     {
         _hierarchyMethodsExecutor = new ObjectHierarchyMethodsExecutor(this);
+        _childRenderers = GetComponentsInChildren<Renderer>(true);
+        CurrentAlfa = _childRenderers.FirstOrDefault()?.material.color.a ?? 1f;
+
         _hierarchyMethodsExecutor.Execute(HierarchyMethodType.On_Awake);
         Init();
     }
@@ -56,6 +68,8 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ITriggerable, IDamagable,
 
         _healthStorage = new HealthStorage(100, 100);
         _healthStorage.OnStateChange += () => _healthBar.SetFill(_healthStorage.CurrentValue / _healthStorage.Capacity);
+
+        SetAlfa(1f);
 
         gameObject.SetActive(true);
     }
@@ -138,5 +152,37 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ITriggerable, IDamagable,
     public void OnElementExtract()
     {
         Init();
+    }
+
+    public void SetAlfa(float value, float? duration = null, Action callback = null)
+    {
+        _lastAlfaChangeTweener?.Kill();
+
+        if (duration.HasValue)
+        {
+            _lastAlfaChangeTweener = DOTween.To(() => CurrentAlfa, value => Set(value), value, 2f)
+                .OnComplete(() => callback?.Invoke());
+        }
+        else
+        {
+            Set(value);
+            callback?.Invoke();
+        }
+
+        void Set(float value)
+        {
+            CurrentAlfa = value;
+
+            foreach (Renderer renderer in _childRenderers)
+                for (int i = 0; i < renderer.materials.Length; i++)
+                {
+                    if (value > 0.99f)
+                        renderer.materials[i].ToOpaqueMode();
+                    else
+                        renderer.materials[i].ToFadeMode();
+
+                    renderer.materials[i].color = renderer.materials[i].color.SetAlfa(value);
+                }
+        }
     }
 }
