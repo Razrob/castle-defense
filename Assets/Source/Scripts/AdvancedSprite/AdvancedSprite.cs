@@ -114,11 +114,18 @@ public sealed class AdvancedSprite : MonoBehaviour
             return;
 
         Material material = Application.isPlaying ? _spriteRenderer.material : _spriteRenderer.sharedMaterial;
-
+        if (material is null)
+        { 
+            Debug.Log(gameObject.name);
+            Debug.Log(gameObject.transform.parent?.name);
+            Debug.Log(gameObject.transform.parent?.parent?.name);
+            Debug.Log(gameObject.transform.parent?.parent?.parent?.name);
+        
+        }
+        
         material.SetInt(INVERSE, Convert.ToInt32(_inverse));
         material.SetFloat(SATURATION, _saturation);
         material.SetFloat(OFFCET, _offcet);
-
         foreach (FillType fillType in _fillParameters.Keys)
             material.SetFloat(_fillParameters[fillType], fillType == _fillType ? _fill : 1f);
     }
