@@ -7,12 +7,14 @@ public class Projectile : MonoBehaviour, IPoolable<Projectile, ProjectileShape>,
 {
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private ParticleSystem _explosion;
+    [SerializeField] private Vector3 _size;
 
     private Predicate<Component> _filter;
 
     public Type CollisionMask { get; private set; }
     public ProjectileCollisionInfo? LastCollisionInfo { get; private set; }
     public Rigidbody Rigidbody => _rigidbody;
+    public Vector3 Size => _size;
 
     public ProjectileShape Identifier { get; private set; }
     public float Damage { get; private set; }
@@ -29,6 +31,12 @@ public class Projectile : MonoBehaviour, IPoolable<Projectile, ProjectileShape>,
         CollisionMask = collisionMask;
         Identifier = projectileShape;
         Damage = damage;
+    }
+
+    private void Update()
+    {
+        if (_rigidbody.velocity.magnitude > 0.1f && CollisionMask != null)
+            transform.rotation = Quaternion.LookRotation(_rigidbody.velocity);
     }
 
     public void OnElementExtract()
@@ -49,6 +57,18 @@ public class Projectile : MonoBehaviour, IPoolable<Projectile, ProjectileShape>,
         DamageDirection = Vector3.zero;
 
         gameObject.SetActive(false);
+    }
+
+    public void SetPosition(Vector3 position)
+    {
+        _rigidbody.position = position;
+        transform.position = position;
+    }
+
+    public void SetRotation(Quaternion rotation)
+    {
+        _rigidbody.rotation = rotation;
+        transform.rotation = rotation;
     }
 
     private void OnTriggerEnter(Collider other)

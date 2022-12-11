@@ -18,7 +18,7 @@ public class ConstructionBuildingTimerActivator : CycleInitializerBase
         ConstructionPlacementTimer timer = FWC.GlobalData.TimersPool.ExtractElement(TimerType.Construction_Placement_Timer)
             .Cast<ConstructionPlacementTimer>();
 
-        timer.transform.position = cellData.Construction.transform.position;
+        timer.transform.position = cellData.Construction.transform.position + cellData.Construction.OptionalTimerOffcet;
         timer.OnComplete += OnComplete;
         timer.StartTimer(_constructionFactory.GetConfiguration(cellData.Construction.ConstructionID).BuildingDuration, 
             cellData.Construction);

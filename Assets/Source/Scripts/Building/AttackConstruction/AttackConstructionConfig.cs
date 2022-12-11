@@ -12,7 +12,11 @@ public class AttackConstructionConfig : ScriptableObject, ISingleConfig
 
     private void OnEnable()
     {
-        _constructions = _attackConstructions?.ToDictionary(c => c.ConstructionID, c => c);
+        try
+        {
+            _constructions = _attackConstructions?.ToDictionary(c => c.ConstructionID, c => c);
+        }
+        catch { }
     }
 
     public ConstructionConfiguration<AttackConstruction> GetConfiguration(ConstructionID constructionID)

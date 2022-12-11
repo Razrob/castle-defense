@@ -65,3 +65,12 @@ MonoBehaviour:
         _value: 5
       - _resourceID: 1
         _value: 4
+  - _identifier: 26
+    _price:
+      _pairs:
+      - _resourceID: 0
+        _value: 3
+      - _resourceID: 2
+        _value: 7
+      - _resourceID: 1
+        _value: 4

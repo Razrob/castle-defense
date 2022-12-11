@@ -8,6 +8,7 @@ public abstract class ConstructionBase : MonoBehaviour, IConstruction, ITriggera
     public abstract ConstructionID ConstructionID { get; }
     public abstract ConstructionSkinBase ConstructionSkinBase { get; }
     public IHealth Health => _healthStorage;
+    public virtual Vector3 OptionalTimerOffcet { get; }
 
     protected abstract HealthBarBase _healthBarBase { get; }
 

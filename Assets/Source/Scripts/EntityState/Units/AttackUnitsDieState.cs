@@ -7,7 +7,7 @@ public class AttackUnitsDieState : UnitEntityStateBase
 
     private float _actionSpeed = 0;
 
-    private const int DIE_LAYER_INDEX = 2;
+    private const int DIE_LAYER_INDEX = 3;
 
     public override EntityStateID EntityStateID => EntityStateID.Die;
 

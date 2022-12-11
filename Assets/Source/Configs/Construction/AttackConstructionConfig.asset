@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AttackConstructionConfig
   m_EditorClassIdentifier: 
   _attackConstructions:
-  - _buildingDuration: 5
+  - _buildingDuration: 2
     _skins:
     - {fileID: 1027402728360758852, guid: ebef833e0f7f50949912ddfd2b66ce2c, type: 3}
     _buildingsSkins: []
@@ -25,5 +25,12 @@ MonoBehaviour:
     - {fileID: 7214569065832860577, guid: 029ba94348d557b47b775030bf390eb7, type: 3}
     _buildingsSkins: []
     ConstructionPrefab: {fileID: -250965127860500058, guid: aa6cc15a91207c04aa4f47bcfb56121f, type: 3}
-    Preview: {fileID: 3072237651995330132, guid: 14617459f413d8149b11d99a8d31686a, type: 3}
+    Preview: {fileID: -8801011040129172902, guid: 14617459f413d8149b11d99a8d31686a, type: 3}
+    Rotation: {x: 0, y: 0, z: 0, w: 1}
+  - _buildingDuration: 2
+    _skins:
+    - {fileID: 1441286355448045018, guid: b9115aa546b48dd4a87f43ca1c0a3bf3, type: 3}
+    _buildingsSkins: []
+    ConstructionPrefab: {fileID: 3327966216617492831, guid: d861c8b4f70a5f04ba9c4c676ab7158e, type: 3}
+    Preview: {fileID: -4405602725887758207, guid: 4fe829c125ace174582c1efd9300003c, type: 3}
     Rotation: {x: 0, y: 0, z: 0, w: 1}

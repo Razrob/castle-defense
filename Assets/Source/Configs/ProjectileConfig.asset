@@ -17,3 +17,5 @@ MonoBehaviour:
     Prefab: {fileID: 2355190655333466620, guid: bd9e667d6ae374049bc583ddc1057def, type: 3}
   - ProjectileShape: 10
     Prefab: {fileID: 7808631738408193970, guid: a698e5bdf38976c44a0242ba4d037d60, type: 3}
+  - ProjectileShape: 20
+    Prefab: {fileID: 7808631738408193970, guid: 706be4c53639ee4478c3b2f553232f2f, type: 3}

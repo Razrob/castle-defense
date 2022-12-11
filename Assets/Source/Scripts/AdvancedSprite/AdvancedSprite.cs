@@ -87,6 +87,7 @@ public sealed class AdvancedSprite : MonoBehaviour
 
     private void OnValidate() 
     {
+        CheckSpriteRenderer();
         CheckMaterialInstancing();
         RefreshShaderParameters();
     }
@@ -96,7 +97,7 @@ public sealed class AdvancedSprite : MonoBehaviour
         if (!_materialInstantiated && Application.isPlaying)
         {
             _materialInstantiated = true;
-            _spriteRenderer.material = Instantiate(_spriteRenderer.sharedMaterial);
+            //_spriteRenderer.material = Instantiate(_spriteRenderer.sharedMaterial);
         }
     }
 
