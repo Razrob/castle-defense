@@ -104,7 +104,6 @@ public class ArcherTowerAttackConstruction : AttackConstruction
         _spawnedRow = null;
 
         projectile.Construct(typeof(IDamagable), ProjectileShape.Row_Projectile, SHOOT_DAMAGE);
-        projectile.transform.parent = null;
 
         projectile.OnCollision += p =>
         {
@@ -112,7 +111,6 @@ public class ArcherTowerAttackConstruction : AttackConstruction
             Destroy(projectile.gameObject);
         };
 
-        //projectile.Rigidbody.useGravity = false;
         projectile.Rigidbody.velocity = Vector3.zero;
         projectile.Rigidbody.angularVelocity = Vector3.zero;
         projectile.Rigidbody.AddForce(toUnitDirection * BULLET_SPEED, ForceMode.VelocityChange);
@@ -130,9 +128,8 @@ public class ArcherTowerAttackConstruction : AttackConstruction
             DOTween.Sequence().AppendInterval(0.09f).AppendCallback(() =>
             {
                 row = FWC.GlobalData.ProjectilesPool.ExtractElement(ProjectileShape.Row_Projectile);
-                row.transform.parent = _skin.ArcherRightHand.transform;
                 row.SetPosition(_skin.ArcherRightHand.transform.position);
-                row.SetRotation(Quaternion.LookRotation(_skin.ArcherRightHand.transform.up));
+                row.SetRotation(Quaternion.LookRotation(-_skin.ArcherRightHand.transform.up));
             })
             .Play();
         });
@@ -143,12 +140,11 @@ public class ArcherTowerAttackConstruction : AttackConstruction
                 return;
 
             Pose pose = CalculateTargetRowPose(row);
-            //row.Rigidbody.rotation = Quaternion.Slerp(row.transform.rotation, pose.rotation, Time.deltaTime * 4f);
+            row.SetPosition(_skin.ArcherRightHand.transform.position);
         });
 
         sequence.AppendCallback(() =>
         {
-            row.transform.parent = null;
             _spawnedRow = row;
 
             _skin.ArcherAnimator.SetInteger(ATTACK_TYPE, 0);
