@@ -14,8 +14,7 @@ public class AttackUnitsMoveState : UnitMoveStateBase
     private AttackUnit _unit;
     private ConstructionsRepository _constructionsRepository;
 
-    private CostructionPathInfo _costructionPathInfo;
-    public CostructionPathInfo CostructionPathInfo => _costructionPathInfo;
+    public ConstructionPathInfo ConstructionPathInfo { get; private set; }
 
     private const int MOVE_LAYER_INDEX = 0;
 
@@ -23,6 +22,16 @@ public class AttackUnitsMoveState : UnitMoveStateBase
     {
         _unit = attackUnit;
         _animator = attackUnit.Animator;
+
+        FWC.GlobalData.ConstructionsRepository.OnRemove += OnConstructionRemove;
+    }
+
+    private void OnConstructionRemove(ConstructionCellData data)
+    {
+        if (ConstructionPathInfo.Construction == data.Construction)
+        {
+            ConstructionPathInfo = ConstructionPathInfo.Default;
+        }
     }
 
     public override void OnStateEnter()
@@ -36,9 +45,7 @@ public class AttackUnitsMoveState : UnitMoveStateBase
         _animator.SetLayerWeight(MOVE_LAYER_INDEX, 0f);
     }
 
-    public override void OnUpdate() { }
-
-    public override void OnFixedUpdate()
+    public override void OnUpdate() 
     {
         FindTarget();
         _animator.SetFloat("MoveSpeed", _velocity.magnitude);
@@ -46,7 +53,7 @@ public class AttackUnitsMoveState : UnitMoveStateBase
 
     private void FindTarget()
     {
-        CostructionPathInfo pathInfo = GetNearestPathToConstruction<AttackConstruction>(_unit, _constructionsRepository);
+        ConstructionPathInfo pathInfo = GetNearestPathToConstruction<AttackConstruction>(_unit, _constructionsRepository);
         
         if (pathInfo.Path.status == NavMeshPathStatus.PathComplete)
         {
@@ -55,14 +62,15 @@ public class AttackUnitsMoveState : UnitMoveStateBase
         else
         {
             pathInfo = GetNearestPathToConstruction<DefenceWallConstruction>(_unit, _constructionsRepository);
+
             if (pathInfo.Path.status == NavMeshPathStatus.PathComplete)
                 RefreshPathInfo(pathInfo);
         }
     }
 
-    private void RefreshPathInfo(CostructionPathInfo pathInfo)
+    private void RefreshPathInfo(ConstructionPathInfo pathInfo)
     {
         _unit.NavMeshAgent.path = pathInfo.Path;
-        _costructionPathInfo = pathInfo;
+        ConstructionPathInfo = pathInfo;
     }
 }

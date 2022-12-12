@@ -20,7 +20,7 @@ MonoBehaviour:
     ConstructionPrefab: {fileID: 5556265040905442284, guid: 2088f88c13a19af488b6d4eb12979c8e, type: 3}
     Preview: {fileID: 3072237651995330132, guid: 6a18c4212e7afc043a90921c8b78ac26, type: 3}
     Rotation: {x: 0, y: 0, z: 0, w: 1}
-  - _buildingDuration: 5
+  - _buildingDuration: 2
     _skins:
     - {fileID: 7214569065832860577, guid: 029ba94348d557b47b775030bf390eb7, type: 3}
     _buildingsSkins: []

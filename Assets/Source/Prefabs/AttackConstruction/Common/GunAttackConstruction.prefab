@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 471495112893646676}
   - component: {fileID: -250965127860500058}
+  - component: {fileID: 3119778859071215580}
   m_Layer: 0
   m_Name: GunAttackConstruction
   m_TagString: Untagged
@@ -49,6 +50,19 @@ MonoBehaviour:
   _triggerBehaviour: {fileID: 5676872445666408176}
   _skin: {fileID: 6261767920021586637}
   _healthBar: {fileID: 963455603}
+--- !u!65 &3119778859071215580
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471495112893646677}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8, y: 0.7665806, z: 0.8}
+  m_Center: {x: -0.00000023841858, y: 0.38017762, z: 0}
 --- !u!1 &1052632207341690229
 GameObject:
   m_ObjectHideFlags: 0

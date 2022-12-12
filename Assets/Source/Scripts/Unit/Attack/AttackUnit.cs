@@ -3,19 +3,6 @@ using UnityEngine;
 
 public abstract class AttackUnit : UnitBase
 {
-   [SerializeField] private ConstructionTriggerBehaviour _triggerBehaviour;
-
-    private List<ConstructionBase> _closesConstructions = new List<ConstructionBase>();
-
     public sealed override UnitType UnitType => UnitType.AttackUnit;
-    public IReadOnlyList<ConstructionBase> ClosesConstructions => _closesConstructions;
-
     public ConstructionBase NearestConstruction { get; private set; }
-
-    [ExecuteHierarchyMethod(HierarchyMethodType.On_Awake)]
-    private void OnAwake()
-    {
-        _triggerBehaviour.EnterEvent += component => _closesConstructions.Add((ConstructionBase)component);
-        _triggerBehaviour.ExitEvent += component => _closesConstructions.Remove((ConstructionBase)component);
-    }
 }

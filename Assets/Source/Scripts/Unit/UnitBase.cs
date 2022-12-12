@@ -14,9 +14,11 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ITriggerable, IDamagable,
     [SerializeField] private Animator _animator;
     [SerializeField] private NavMeshAgent _navMeshAgent;
     [SerializeField] private DefaultHealthBar _healthBar;
+    [SerializeField] private ConstructionTriggerBehaviour _triggerBehaviour;
 
     private ObjectHierarchyMethodsExecutor _hierarchyMethodsExecutor;
     private IReadOnlyCollection<Renderer> _childRenderers;
+    private List<ConstructionBase> _closesConstructions = new List<ConstructionBase>();
 
     private TweenerCore<float, float, FloatOptions> _lastAlfaChangeTweener;
 
@@ -27,6 +29,7 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ITriggerable, IDamagable,
     public Animator Animator => _animator;
     public EntityStateMachine StateMachine => _stateMachine;
     public Vector3 Velocity => _navMeshAgent.velocity;
+    public IReadOnlyList<ConstructionBase> ClosesConstructions => _closesConstructions;
 
     public bool IsDied => _healthStorage.CurrentValue < 1f;
 
@@ -49,6 +52,9 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ITriggerable, IDamagable,
         _hierarchyMethodsExecutor = new ObjectHierarchyMethodsExecutor(this);
         _childRenderers = GetComponentsInChildren<Renderer>(true);
         CurrentAlfa = _childRenderers.FirstOrDefault()?.material.color.a ?? 1f;
+
+        _triggerBehaviour.EnterEvent += component => _closesConstructions.Add(component.Cast<ConstructionBase>());
+        _triggerBehaviour.ExitEvent += component => _closesConstructions.Remove(component.Cast<ConstructionBase>());
 
         _hierarchyMethodsExecutor.Execute(HierarchyMethodType.On_Awake);
         Init();

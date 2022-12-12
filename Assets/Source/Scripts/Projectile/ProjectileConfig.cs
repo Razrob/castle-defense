@@ -6,13 +6,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ProjectileConfig", menuName = "Config/ProjectileConfig")]
 public class ProjectileConfig : ScriptableObject, ISingleConfig
 {
-    [SerializeField] private ProjectileData[] _projectilesData;
+    [SerializeField] private ProjectileConfiguration[] _projectiles;
 
-    private Dictionary<ProjectileShape, ProjectileData> _projectilesDictionary;
+    private Dictionary<ProjectileShape, ProjectileConfiguration> _projectilesDictionary;
 
     private void OnEnable()
     {
-        _projectilesDictionary = _projectilesData?.ToDictionary(data => data.ProjectileShape, data => data);
+        _projectilesDictionary = _projectiles?.ToDictionary(data => data.Prefab.Identifier, data => data);
     }
 
     public Projectile Create(ProjectileShape projectileShape)
@@ -26,9 +26,8 @@ public class ProjectileConfig : ScriptableObject, ISingleConfig
 
 
     [Serializable]
-    private struct ProjectileData
+    private struct ProjectileConfiguration
     {
-        public ProjectileShape ProjectileShape;
         public Projectile Prefab;
     }
 }

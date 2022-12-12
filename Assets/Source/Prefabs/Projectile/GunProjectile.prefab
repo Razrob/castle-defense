@@ -96,8 +96,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c07e5503b88eb94e88100439c498130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _projectileShape: 10
   _rigidbody: {fileID: 7808631738408193980}
   _explosion: {fileID: 0}
+  _size: {x: 0, y: 0, z: 0}
 --- !u!135 &7808631738408193971
 SphereCollider:
   m_ObjectHideFlags: 0

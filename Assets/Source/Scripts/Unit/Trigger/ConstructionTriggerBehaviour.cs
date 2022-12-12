@@ -5,7 +5,7 @@ public class ConstructionTriggerBehaviour : TriggerZone
 {
     [SerializeField] private SphereCollider _sphereCollider;
 
-    protected override Func<ITriggerable, bool> EnteredComponentIsSuitable => component => component is ConstructionBase;
+    protected override Func<ITriggerable, bool> EnteredComponentIsSuitable => component => component.CastPossible<ConstructionBase>();
 
     public void SetTriggerRadius(float value)
     {

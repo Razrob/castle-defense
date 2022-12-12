@@ -65,14 +65,7 @@ public class MortarAttackConstruction : AttackConstruction
         if (NearestUnit is null)
             return;
 
-        Projectile projectile = FWC.GlobalData.ProjectilesPool.ExtractElement(ProjectileShape.Mortar_Projectile);
-
-        projectile.Construct(typeof(IDamagable), ProjectileShape.Mortar_Projectile, SHOOT_DAMAGE);
-        projectile.Rigidbody.position = _skin.BulletSpawnPoint.position;
-        projectile.OnCollision += p =>
-        {
-            p.LastCollisionInfo.Value.TryGetComponent<IDamagable>().TakeDamage(p);
-        };
+        Projectile projectile = PrepareProjectile(ProjectileShape.Mortar_Projectile, SHOOT_DAMAGE, _skin.BulletSpawnPoint.position);
 
         float startVelocityMagnitude = Mathf.Sqrt(
             (-Physics.gravity.y * distance) 

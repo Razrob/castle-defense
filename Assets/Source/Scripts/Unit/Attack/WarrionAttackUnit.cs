@@ -23,6 +23,9 @@ public class WarrionAttackUnit : AttackUnit
         EntityStateID.Move);
 
         _moveState = _stateMachine.GetState<AttackUnitsMoveState>(EntityStateID.Move);
+        _stateMachine.GetState<AttackUnitsAttackStateBase>().OnUnitAttack +=
+            () => _moveState.ConstructionPathInfo.Construction?.TakeDamage(new DefaultDamageApplicator(20f));
+
         OnUnitDied += OnDied;
     }
 
@@ -46,12 +49,13 @@ public class WarrionAttackUnit : AttackUnit
 
     private void ChangeState()
     {
-        if (_moveState.CostructionPathInfo.ConstructionPosition.HasValue)
+        if (_moveState.ConstructionPathInfo.ConstructionPosition.HasValue)
         {
-            Vector3Int targetConstructionPosition = (Vector3Int)_moveState.CostructionPathInfo.ConstructionPosition;
+            Vector3Int targetConstructionPosition = _moveState.ConstructionPathInfo.ConstructionPosition.Value;
+
             if (ClosesConstructions.Contains(_constructionsRepository.GetConstruction(targetConstructionPosition)))
             {
-                _stateMachine.SetState(EntityStateID.Attack);
+                _stateMachine.SetState(EntityStateID.Warrior_Attack);
                 return;
             }
         }

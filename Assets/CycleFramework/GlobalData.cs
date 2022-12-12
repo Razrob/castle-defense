@@ -13,6 +13,7 @@ public class GlobalData
     public SpecificFormConstructionTransformer FormConstructionTransformer;
     public LevelProgressData LevelProgressData;
 
+    public Pool<ConstructionBase, ConstructionID> ConstructionPool;
     public Pool<Projectile, ProjectileShape> ProjectilesPool;
     public Pool<SpriteTimerBase, TimerType> TimersPool;
     public Pool<UnitBase, UnitID> UnitsPool;

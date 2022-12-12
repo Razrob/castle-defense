@@ -45,18 +45,7 @@ public class GunAttackConstruction : AttackConstruction
 
     private void Shoot(Vector3 toUnitDirection)
     {
-        Projectile projectile = FWC.GlobalData.ProjectilesPool.ExtractElement(ProjectileShape.Gun_Projectile);
-
-        projectile.Construct(typeof(IDamagable), ProjectileShape.Gun_Projectile, SHOOT_DAMAGE);
-        projectile.Rigidbody.position = _skin.BulletSpawnPoint.position;
-        projectile.transform.position = _skin.BulletSpawnPoint.position;
-
-        projectile.OnCollision += p =>
-        {
-            p.LastCollisionInfo.Value.TryGetComponent<IDamagable>().TakeDamage(p);
-            Destroy(projectile.gameObject);
-        };
-
+        Projectile projectile = PrepareProjectile(ProjectileShape.Gun_Projectile, SHOOT_DAMAGE, _skin.BulletSpawnPoint.position);
         projectile.Rigidbody.velocity = toUnitDirection * BULLET_SPEED;
     }
 }

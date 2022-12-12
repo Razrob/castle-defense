@@ -1,21 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public struct CostructionPathInfo
-{
-    private Vector3Int? _constructionPosition;
-    private NavMeshPath _path;
-
-    public Vector3Int? ConstructionPosition => _constructionPosition;
-    public NavMeshPath Path => _path;
-
-    public CostructionPathInfo(Vector3Int? costructionPosition, NavMeshPath path)
-    {
-        _path = path;
-        _constructionPosition = costructionPosition;
-    }
-}
-
 public abstract class UnitMoveStateBase : UnitEntityStateBase
 {
     public UnitMoveStateBase(Animator animator) : base(animator) { }
@@ -27,11 +12,11 @@ public abstract class UnitMoveStateBase : UnitEntityStateBase
         return path.status == NavMeshPathStatus.PathComplete;
     }
 
-    protected CostructionPathInfo GetNearestPathToConstruction<TypeConstruction>(AttackUnit unit, ConstructionsRepository constructionsRepository) where TypeConstruction : IConstruction
+    protected ConstructionPathInfo GetNearestPathToConstruction<TypeConstruction>(AttackUnit unit, ConstructionsRepository constructionsRepository) where TypeConstruction : IConstruction
     {
-        NavMeshPath pathToTarget  = new NavMeshPath();
+        ConstructionPathInfo costructionPathInfo = ConstructionPathInfo.Default;
+
         float? minimalDistance = null;
-        Vector3Int? nearestConstructionPosition = null;
         foreach (Vector3Int constructionPosition in constructionsRepository.Positions)
         {
             if (constructionsRepository.ConstructionExist<TypeConstruction>(constructionPosition))
@@ -39,16 +24,18 @@ public abstract class UnitMoveStateBase : UnitEntityStateBase
                 ConstructionBase construction = constructionsRepository.GetConstruction(constructionPosition);
                 float distance = (unit.transform.position - construction.transform.position).magnitude;
                 
-                if ((!minimalDistance.HasValue || distance < minimalDistance)&& (PathIsValid(unit.transform.position, constructionPosition, pathToTarget)))
+                if ((!minimalDistance.HasValue || distance < minimalDistance) 
+                    && (PathIsValid(unit.transform.position, constructionPosition, costructionPathInfo.Path)))
                 {
-                    if (PathIsValid(unit.transform.position, constructionPosition, pathToTarget))
+                    if (PathIsValid(unit.transform.position, constructionPosition, costructionPathInfo.Path))
                     { 
                         minimalDistance = distance;
-                        nearestConstructionPosition = constructionPosition;
+                        costructionPathInfo = new ConstructionPathInfo(constructionPosition, costructionPathInfo.Path, construction);
                     }
                 }   
             }
         }
-        return new  CostructionPathInfo(nearestConstructionPosition, pathToTarget);
+
+        return costructionPathInfo;
     }
 }

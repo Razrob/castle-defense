@@ -9,9 +9,11 @@ public class ConstructionsRepository : IConstructionGrid
     private readonly Dictionary<Vector3Int, ConstructionCellData> _constructions;
 
     public IReadOnlyCollection<Vector3Int> Positions => _constructions.Keys;
+    public IReadOnlyDictionary<Vector3Int, ConstructionCellData> Constructions => _constructions;
 
     public event Action OnRepositoryChange;
     public event Action<ConstructionCellData> OnAdd;
+    public event Action<ConstructionCellData> OnRemove;
 
     public ConstructionsRepository()
     {
@@ -46,12 +48,20 @@ public class ConstructionsRepository : IConstructionGrid
         OnRepositoryChange?.Invoke();
     }
 
-    public ConstructionBase GetConstruction(Vector3Int position)
+    public ConstructionBase GetConstruction(Vector3Int position, bool remove = false)
     {
         if (!_constructions.ContainsKey(position))
             throw new Exception($"Position {position} not found");
 
-        return _constructions[position].Construction;
+        ConstructionCellData data = _constructions[position];
+
+        if (remove)
+        {
+            _constructions.Remove(position);
+            OnRemove?.Invoke(data);
+        }
+
+        return data.Construction;
     }
 
     public Vector3 RoundPositionToGrid(Vector3 position)

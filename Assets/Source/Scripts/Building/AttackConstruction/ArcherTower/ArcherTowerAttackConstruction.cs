@@ -21,6 +21,7 @@ public class ArcherTowerAttackConstruction : AttackConstruction
         && _skin.ArcherAnimator.GetInteger(ATTACK_TYPE) != 2;
 
     private Projectile _spawnedRow;
+    private Sequence _shootSequence;
 
     protected override HealthBarBase _healthBarBase => _healthBar;
     public override Vector3 OptionalTimerOffcet => Vector3.up * 0.75f;
@@ -35,6 +36,8 @@ public class ArcherTowerAttackConstruction : AttackConstruction
         _skin.ArcherAnimator.SetInteger(ATTACK_TYPE, 0);
 
         _spawnedRow = FWC.GlobalData.ProjectilesPool.ExtractElement(ProjectileShape.Row_Projectile);
+
+        OnConstructionDied += c => _shootSequence?.Kill();
     }
 
     [ExecuteHierarchyMethod(HierarchyMethodType.On_Update)]
@@ -103,12 +106,16 @@ public class ArcherTowerAttackConstruction : AttackConstruction
         Projectile projectile = _spawnedRow;
         _spawnedRow = null;
 
-        projectile.Construct(typeof(IDamagable), ProjectileShape.Row_Projectile, SHOOT_DAMAGE);
+        projectile.Construct(new ProjectileConstructInfo
+        {
+            CollisionMask = typeof(IDamagable),
+            Damage = SHOOT_DAMAGE,
+            Filter = component => !component.CastPossible<ConstructionBase>(),
+        });
 
         projectile.OnCollision += p =>
         {
             p.LastCollisionInfo.Value.TryGetComponent<IDamagable>().TakeDamage(p);
-            Destroy(projectile.gameObject);
         };
 
         projectile.Rigidbody.velocity = Vector3.zero;
@@ -118,10 +125,12 @@ public class ArcherTowerAttackConstruction : AttackConstruction
         _skin.ArcherAnimator.SetInteger(ATTACK_TYPE, 1);
 
         Projectile row = null;
-        Sequence sequence = DOTween.Sequence();
 
-        sequence.AppendInterval(0.167f);
-        sequence.AppendCallback(() =>
+        _shootSequence?.Kill();
+        _shootSequence = DOTween.Sequence();
+
+        _shootSequence.AppendInterval(0.167f);
+        _shootSequence.AppendCallback(() =>
         {
             _skin.ArcherAnimator.SetInteger(ATTACK_TYPE, 2);
 
@@ -134,7 +143,7 @@ public class ArcherTowerAttackConstruction : AttackConstruction
             .Play();
         });
 
-        sequence.AppendInterval(0.370f).OnUpdate(() =>
+        _shootSequence.AppendInterval(0.370f).OnUpdate(() =>
         {
             if (row is null)
                 return;
@@ -143,7 +152,7 @@ public class ArcherTowerAttackConstruction : AttackConstruction
             row.SetPosition(_skin.ArcherRightHand.transform.position);
         });
 
-        sequence.AppendCallback(() =>
+        _shootSequence.AppendCallback(() =>
         {
             _spawnedRow = row;
 

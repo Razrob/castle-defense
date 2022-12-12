@@ -2,6 +2,6 @@
 {
     Move = 0,
     Build = 1,
-    Attack = 2,
+    Warrior_Attack = 2,
     Die = 3,
 };

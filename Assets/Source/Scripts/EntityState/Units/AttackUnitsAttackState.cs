@@ -1,30 +1,37 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-public class AttackUnitsAttackState : UnitEntityStateBase
+public class AttackUnitsAttackState : AttackUnitsAttackStateBase
 {
     private readonly AttackUnit _unit;
 
     private float _actionSpeed = 0;
 
     private const int ATTACK_LAYER_INDEX = 1;
+    private const float ATTACK_START_DELAY = 0.9456f;
+    private const float ATTACK_INTERVAL = 2.4f;
 
-    public override EntityStateID EntityStateID => EntityStateID.Attack;
+    public override EntityStateID EntityStateID => EntityStateID.Warrior_Attack;
 
-    public AttackUnitsAttackState(AttackUnit attackUnit) : base(attackUnit.Animator)
+    public override event Action OnUnitAttack;
+
+    public AttackUnitsAttackState(AttackUnit attackUnit) : base(attackUnit)
     {
         _unit = attackUnit;
     }
 
-    public override void OnStateEnter()
+    public override void OnStateEnterCallback()
     {
         _actionSpeed = 0f;
+
+        RegisterCycleAttackCallback(ATTACK_START_DELAY, ATTACK_INTERVAL, () => OnUnitAttack?.Invoke());
 
         ChangeLayerWeight(ATTACK_LAYER_INDEX, 1f);
         _unit.SetDestination(_unit.transform.position);
         _unit.Animator.SetInteger("AttackType", 0);
     }
 
-    public override void OnStateExit()
+    public override void OnStateExitCallback()
     {
         ChangeLayerWeight(ATTACK_LAYER_INDEX, 0f);
         _unit.Animator.SetInteger("AttackType", -1);
