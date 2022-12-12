@@ -106,5 +106,8 @@ public class Projectile : MonoBehaviour, IPoolable<Projectile, ProjectileShape>,
         }
 
         OnCollision?.Invoke(this);
+
+        if (!_explosion)
+            ElementReturnEvent?.Invoke(this);
     }
 }

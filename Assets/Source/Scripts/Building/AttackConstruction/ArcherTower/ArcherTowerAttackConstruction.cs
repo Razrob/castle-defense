@@ -136,6 +136,9 @@ public class ArcherTowerAttackConstruction : AttackConstruction
 
             DOTween.Sequence().AppendInterval(0.09f).AppendCallback(() =>
             {
+                if (IsDied)
+                    return;
+
                 row = FWC.GlobalData.ProjectilesPool.ExtractElement(ProjectileShape.Row_Projectile);
                 row.SetPosition(_skin.ArcherRightHand.transform.position);
                 row.SetRotation(Quaternion.LookRotation(-_skin.ArcherRightHand.transform.up));
