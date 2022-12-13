@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a888f703f14c954d9a2915f8c17532f, type: 3}
+  m_Name: BuilderHouseConstructionConfig
+  m_EditorClassIdentifier: 
+  _builderHousePosition: {x: -10, y: 0, z: 0}
+  _busyCells:
+  - {x: -9, y: 0, z: 0}
+  - {x: -11, y: 0, z: 0}
+  - {x: -10, y: 0, z: 1}
+  - {x: -10, y: 0, z: -1}
+  - {x: -9, y: 0, z: 1}
+  - {x: -9, y: 0, z: -1}
+  - {x: -11, y: 0, z: 1}
+  - {x: -11, y: 0, z: -1}
+  _prefab:
+    _buildingDuration: 0
+    _skins:
+    - {fileID: 1310471658365874847, guid: f92201a5c6100d64d8cd3ef71468099c, type: 3}
+    _buildingsSkins: []
+    ConstructionPrefab: {fileID: 8329932648042001404, guid: c51cdae5c3733c74d869f31c5642dadb, type: 3}
+    Preview: {fileID: 0}
+    Rotation: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}

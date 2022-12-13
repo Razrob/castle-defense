@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "DefenceWallsConfig", menuName = "Config/DefenceWallsConfig")]
+[CreateAssetMenu(fileName = "DefenceWallsConfig", menuName = "Config/Construction/DefenceWallsConfig")]
 public class DefenceWallsConfig : ScriptableObject, ISingleConfig
 {
     [SerializeField] private ConstructionConfiguration<DefenceWallConstruction> _defaultWall;

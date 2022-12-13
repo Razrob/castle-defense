@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ConstructionsPurchaseConfig", menuName = "Config/ConstructionsPurchaseConfig")]
+[CreateAssetMenu(fileName = "ConstructionsPurchaseConfig", menuName = "Config/Construction/ConstructionsPurchaseConfig")]
 public class ConstructionsPurchaseConfig : ScriptableObject, ISingleConfig
 {
     [SerializeField] private PurchaseInfo<ConstructionID, ResourceSpan>[] _prices;

@@ -4,8 +4,6 @@ using Zenject;
 
 public class ConstructionDestroyer : CycleInitializerBase
 {
-    [Inject] private IConstructionFactory _constructionFactory;
-
     protected override void OnInit()
     {
         foreach (ConstructionCellData data in FWC.GlobalData.ConstructionsRepository.Constructions.Values)
@@ -23,9 +21,9 @@ public class ConstructionDestroyer : CycleInitializerBase
     {
         construction.OnConstructionDied += OnHealthEnd;
 
-        DefaultDestroyedConstruction destroyedConstruction =
-            FWC.GlobalData.ConstructionPool.ExtractElement(ConstructionID.Default_Destroyed_Construction)
-            .Cast<DefaultDestroyedConstruction>();
+        DestroyedConstructionBase destroyedConstruction =
+            FWC.GlobalData.ConstructionPool.ExtractElement(construction.DestroyCaseConstructionID)
+            .Cast<DestroyedConstructionBase>();
 
         destroyedConstruction.transform.position = construction.transform.position;
         destroyedConstruction.Destroy(new ConstructionDestroyInfo

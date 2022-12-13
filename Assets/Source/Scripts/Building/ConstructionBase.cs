@@ -7,15 +7,18 @@ public abstract class ConstructionBase : MonoBehaviour, IConstruction, ITriggera
     public ConstructionLevel ConstructionLevel { get; private set; } = ConstructionLevel.Level_1;
     public ConstructionActivityState ActivityState { get; private set; } = ConstructionActivityState.Enabled;
     public abstract ConstructionID ConstructionID { get; }
+    public virtual ConstructionID DestroyCaseConstructionID => ConstructionID.Default_Destroyed_Construction;
     public abstract ConstructionSkinBase ConstructionSkinBase { get; }
     public IHealth Health => _healthStorage;
     public virtual Vector3 OptionalTimerOffcet { get; }
     public bool IsDied { get; private set; }
+    public Bounds Bounds => _boundsCollider.bounds;
 
     protected abstract HealthBarBase _healthBarBase { get; }
 
     public ConstructionID Identifier => ConstructionID;
 
+    private Collider _boundsCollider;
     private HealthStorage _healthStorage;
     private ObjectHierarchyMethodsExecutor _hierarchyMethodsExecutor;
     private bool _awakeWasCalled;
@@ -32,9 +35,9 @@ public abstract class ConstructionBase : MonoBehaviour, IConstruction, ITriggera
     {
         if (_awakeWasCalled)
             return;
-
         _awakeWasCalled = true;
 
+        _boundsCollider = GetComponent<Collider>();
         _healthStorage = new HealthStorage(100, 100);
         _hierarchyMethodsExecutor = new ObjectHierarchyMethodsExecutor(this);
         _hierarchyMethodsExecutor.Execute(HierarchyMethodType.On_Awake);

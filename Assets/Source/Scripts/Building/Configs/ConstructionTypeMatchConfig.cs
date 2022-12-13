@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ConstructionTypeMatchConfig", menuName = "Config/ConstructionTypeMatchConfig")]
+[CreateAssetMenu(fileName = "ConstructionTypeMatchConfig", menuName = "Config/Construction/ConstructionTypeMatchConfig")]
 public class ConstructionTypeMatchConfig : ScriptableObject, ISingleConfig
 {
     [SerializeField] private ConstructionTypePair[] _constructionTypePairs;

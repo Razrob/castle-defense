@@ -19,3 +19,9 @@ MonoBehaviour:
     ConstructionPrefab: {fileID: 7017113451216259356, guid: 75399f32e33a15d4fafdab27878f546d, type: 3}
     Preview: {fileID: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 0}
+  - _buildingDuration: 0
+    _skins: []
+    _buildingsSkins: []
+    ConstructionPrefab: {fileID: 1553417412152128354, guid: cc9bfa817b794f14882bfdaad6f86514, type: 3}
+    Preview: {fileID: 0}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}

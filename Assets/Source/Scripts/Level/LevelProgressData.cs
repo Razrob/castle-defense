@@ -11,6 +11,7 @@ public class LevelProgressData
     public bool LevelIsActive => ActiveLevelInfo != null;
 
     public event Action OnLevelComplete;
+    public event Action OnLevelLose;
     public event Action OnLevelStart;
 
     public void CompleteLevel()
@@ -19,6 +20,12 @@ public class LevelProgressData
 
         OnLevelComplete?.Invoke();
 
+        ActiveLevelInfo = null;
+    }
+
+    public void LoseLevel()
+    {
+        OnLevelLose?.Invoke();
         ActiveLevelInfo = null;
     }
 

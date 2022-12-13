@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "AttackConstructionConfig", menuName = "Config/AttackConstructionConfig")]
+[CreateAssetMenu(fileName = "AttackConstructionConfig", menuName = "Config/Construction/AttackConstructionConfig")]
 public class AttackConstructionConfig : ScriptableObject, ISingleConfig
 {
     [SerializeField] private ConstructionConfiguration<AttackConstruction>[] _attackConstructions;

@@ -53,19 +53,19 @@ public class AttackUnitsMoveState : UnitMoveStateBase
 
     private void FindTarget()
     {
-        ConstructionPathInfo pathInfo = GetNearestPathToConstruction<AttackConstruction>(_unit, _constructionsRepository);
+        ConstructionPathInfo pathInfo = GetNearestPathToConstruction<ConstructionBase>(_unit, _constructionsRepository);
         
         if (pathInfo.Path.status == NavMeshPathStatus.PathComplete)
         {
             RefreshPathInfo(pathInfo);
         }
-        else
-        {
-            pathInfo = GetNearestPathToConstruction<DefenceWallConstruction>(_unit, _constructionsRepository);
+        //else
+        //{
+        //    pathInfo = GetNearestPathToConstruction<DefenceWallConstruction>(_unit, _constructionsRepository);
 
-            if (pathInfo.Path.status == NavMeshPathStatus.PathComplete)
-                RefreshPathInfo(pathInfo);
-        }
+        //    if (pathInfo.Path.status == NavMeshPathStatus.PathComplete)
+        //        RefreshPathInfo(pathInfo);
+        //}
     }
 
     private void RefreshPathInfo(ConstructionPathInfo pathInfo)

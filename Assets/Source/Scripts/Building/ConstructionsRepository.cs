@@ -7,6 +7,7 @@ public class ConstructionsRepository : IConstructionGrid
 {
     private readonly BuildingGridConfig _constructionConfig;
     private readonly Dictionary<Vector3Int, ConstructionCellData> _constructions;
+    private readonly HashSet<Vector3Int> _blockedCells;
 
     public IReadOnlyCollection<Vector3Int> Positions => _constructions.Keys;
     public IReadOnlyDictionary<Vector3Int, ConstructionCellData> Constructions => _constructions;
@@ -21,6 +22,7 @@ public class ConstructionsRepository : IConstructionGrid
             throw new NullReferenceException();
 
         _constructions = new Dictionary<Vector3Int, ConstructionCellData>();
+        _blockedCells = new HashSet<Vector3Int>();
     }
 
     public bool AnyConstructionInBuilding() => 
@@ -36,10 +38,22 @@ public class ConstructionsRepository : IConstructionGrid
         return ConstructionExist(position) && GetConstruction(position) is TType;
     }
 
+    public bool CellIsBlocked(Vector3Int position) => _blockedCells.Contains(position);
+    public void BlockCell(Vector3Int position)
+    {
+        if (!_constructions.ContainsKey(position))
+            _blockedCells.Add(position);
+    }
+
+    public void UnblockCell(Vector3Int position) => _blockedCells.Remove(position);
+
     public void AddConstruction(Vector3Int position, ConstructionBase construction)
     {
         if (_constructions.ContainsKey(position))
             throw new Exception($"Position {position} already exist in grid");
+
+        if (_blockedCells.Contains(position))
+            throw new Exception($"Position {position} blocked");
 
         construction.transform.position = position;
         _constructions.Add(position, new ConstructionCellData(construction));
@@ -62,6 +76,19 @@ public class ConstructionsRepository : IConstructionGrid
         }
 
         return data.Construction;
+    }
+
+    public TConstruction GetConstruction<TConstruction>(Predicate<TConstruction> predicate = null, bool remove = false) 
+        where TConstruction : IConstruction
+    {
+        foreach (Vector3Int position in _constructions.Keys)
+        {
+            if (_constructions[position].Construction.TryCast(out TConstruction construction))
+                if (predicate is null || predicate(construction))
+                    return GetConstruction(position, remove).Cast<TConstruction>();
+        }
+
+        return default;
     }
 
     public Vector3 RoundPositionToGrid(Vector3 position)

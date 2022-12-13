@@ -9,4 +9,6 @@ public enum ConstructionID
     Stone_Mine = 110,
     Wood_Mine = 120,
     Default_Destroyed_Construction = 1000,
+    Builder_House_Destroyed_Construction = 1005,
+    Builder_House = 2000,
 }
