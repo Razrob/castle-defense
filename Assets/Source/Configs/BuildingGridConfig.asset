@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: BuildingGridConfig
   m_EditorClassIdentifier: 
   _gridTileSize: 1
+  _gridArea:
+    Min: {x: -11, y: -4}
+    Max: {x: 0, y: 4}

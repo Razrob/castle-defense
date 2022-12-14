@@ -35,7 +35,7 @@ public class ConstructionPlacer : CycleInitializerBase
 
         potentialPosition = FWC.GlobalData.ConstructionsRepository.RoundPositionToGrid(potentialPosition).SetY(0f);
 
-        if (FWC.GlobalData.ConstructionsRepository.ConstructionExist(potentialPosition.ToInt()))
+        if (!FWC.GlobalData.ConstructionsRepository.CellIsAvailable(potentialPosition.ToInt()))
             return;
 
         FWC.GlobalData.ConstructionPlacementData.CurrentPlacementInfo.SetPotentialPlacementPosition(potentialPosition);

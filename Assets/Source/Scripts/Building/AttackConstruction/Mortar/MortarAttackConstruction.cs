@@ -1,12 +1,6 @@
 ﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Test : IDamageApplicator
-{
-    public float Damage => 10f;
-    public Vector3 DamageDirection => Vector3.zero;
-}
-
 public class MortarAttackConstruction : AttackConstruction
 {
     [SerializeField] private MortarConstructionSkin _skin;
@@ -14,7 +8,7 @@ public class MortarAttackConstruction : AttackConstruction
 
     private const float ANGLE = 55f;
     private const float SHOOT_DELAY = 2f;
-    private const float SHOOT_DAMAGE = 60f;
+    private const float SHOOT_DAMAGE = 130f;
     private float _lastShootTimer;
 
     protected override HealthBarBase _healthBarBase => _healthBar;
@@ -26,7 +20,7 @@ public class MortarAttackConstruction : AttackConstruction
     private void OnUpdate()
     {
         if (Input.GetKeyUp(KeyCode.W))
-            TakeDamage(new Test());
+            TakeDamage(new DefaultDamageApplicator(10));
 
         _lastShootTimer += Time.deltaTime;
 

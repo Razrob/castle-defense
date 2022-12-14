@@ -25,14 +25,14 @@ public class ConstructionsRepository : IConstructionGrid
         _blockedCells = new HashSet<Vector3Int>();
     }
 
-    public bool AnyConstructionInBuilding() => 
+    public bool AnyConstructionInBuilding() =>
         _constructions.Values.Any(c => c.Construction.ActivityState is ConstructionActivityState.Building_In_Progress);
 
     public bool ConstructionExist(Vector3Int position)
     {
         return _constructions.ContainsKey(position);
     }
-    
+
     public bool ConstructionExist<TType>(Vector3Int position) where TType : IConstruction
     {
         return ConstructionExist(position) && GetConstruction(position) is TType;
@@ -47,8 +47,18 @@ public class ConstructionsRepository : IConstructionGrid
 
     public void UnblockCell(Vector3Int position) => _blockedCells.Remove(position);
 
+    public bool CellIsAvailable(Vector3Int position) 
+    {
+        return !ConstructionExist(position)
+            && !CellIsBlocked(position)
+            && _constructionConfig.GridArea.PointInArea(position);
+    }
+
     public void AddConstruction(Vector3Int position, ConstructionBase construction)
     {
+        if (!_constructionConfig.GridArea.PointInArea(new Vector2Int(position.x, position.y)))
+            throw new Exception($"Position {position} out of grid area");
+
         if (_constructions.ContainsKey(position))
             throw new Exception($"Position {position} already exist in grid");
 

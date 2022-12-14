@@ -62,7 +62,8 @@ public class WarrionAttackUnit : AttackUnit
                 NavMeshAgent.stoppingDistance = 
                     new Vector3(constructionSize.x * Mathf.Cos(Mathf.Deg2Rad * angle), 
                     0f, 
-                    constructionSize.z * Mathf.Sin(Mathf.Deg2Rad * angle)).magnitude / 2f + 1f;
+                    constructionSize.z * Mathf.Sin(Mathf.Deg2Rad * angle)).magnitude / 2.4f 
+                    + 0.3f;
 
                 _stateMachine.SetState(EntityStateID.Warrior_Attack);
                 return;
