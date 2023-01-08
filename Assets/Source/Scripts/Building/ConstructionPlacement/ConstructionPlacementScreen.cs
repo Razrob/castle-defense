@@ -36,15 +36,6 @@ public class ConstructionPlacementScreen : UIScreen
         OnConstructionSelect?.Invoke();
     }
 
-    private void ChangePanelActive(bool value)
-    {
-        if (IsOpen == value)
-            return;
-
-        _cellsPanelParent.SetActive(value);
-        OnActiveChange?.Invoke(value);
-    }
-
     private void OnApplyButtonClick()
     {
         if (OnTryApply is null)
@@ -52,5 +43,14 @@ public class ConstructionPlacementScreen : UIScreen
 
         if (OnTryApply())
             SelectedCell = null;
+    }
+
+    public void ChangePanelActive(bool value)
+    {
+        if (IsOpen == value)
+            return;
+
+        _cellsPanelParent.SetActive(value);
+        OnActiveChange?.Invoke(value);
     }
 }
