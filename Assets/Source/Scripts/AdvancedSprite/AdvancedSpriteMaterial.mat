@@ -63,14 +63,14 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _HorizontalFill: 0.377
+    - _HorizontalFill: 1
     - _Inverse: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Offcet: 0
     - _Parallax: 0.02
-    - _RadialFill: 1
+    - _RadialFill: 0.664
     - _Saturation: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
