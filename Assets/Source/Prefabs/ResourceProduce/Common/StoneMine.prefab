@@ -92,6 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7258360261867536029}
   - component: {fileID: 7258360261867536026}
+  - component: {fileID: 1849521011598109026}
   m_Layer: 0
   m_Name: StoneMine
   m_TagString: Untagged
@@ -135,6 +136,19 @@ MonoBehaviour:
   _processPanel: {fileID: 2521841847230751534}
   _skin: {fileID: 7258360263207625493}
   _healthBar: {fileID: 6406528918566204662}
+--- !u!65 &1849521011598109026
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7258360261867536028}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 0.84687996}
+  m_Center: {x: 0, y: 0, z: 0.07656002}
 --- !u!1 &7686637340653412658
 GameObject:
   m_ObjectHideFlags: 0

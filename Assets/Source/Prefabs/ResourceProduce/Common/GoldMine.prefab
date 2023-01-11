@@ -92,6 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6980801588387424521}
   - component: {fileID: 6980801588387424534}
+  - component: {fileID: 6439050912006588726}
   m_Layer: 0
   m_Name: GoldMine
   m_TagString: Untagged
@@ -135,6 +136,19 @@ MonoBehaviour:
   _processPanel: {fileID: 732280870993028862}
   _skin: {fileID: 6980801589731751040}
   _healthBar: {fileID: 7562027169443040510}
+--- !u!65 &6439050912006588726
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6980801588387424520}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 0.84687996}
+  m_Center: {x: 0, y: 0, z: 0.07656002}
 --- !u!1 &7995650563504748198
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,7 +175,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7995650563504748198}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.322, y: -0.068, z: -0.363}
+  m_LocalPosition: {x: 0.322, y: -0.011, z: -0.363}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 974401589667041181}

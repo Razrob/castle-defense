@@ -86,6 +86,7 @@ public class ConstructionPlacer : CycleInitializerBase
             construction);
 
         ChangePlacementMode(PlacementMode.Empty, null);
+        _constructionPlacementScreen.ChangePanelActive(false);
 
         return true;
     }

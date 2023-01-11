@@ -10,7 +10,7 @@ public class ArcherTowerAttackConstruction : AttackConstruction
     [SerializeField] private DefaultHealthBar _healthBar;
 
     private const float SHOOT_DELAY = 1.2f;
-    private const float BULLET_SPEED = 15f;
+    private const float BULLET_SPEED = 12f;
     private const float SHOOT_DAMAGE = 26f;
     private float _lastShootTimer;
 
@@ -54,18 +54,20 @@ public class ArcherTowerAttackConstruction : AttackConstruction
         float realDuration = distance / BULLET_SPEED;
 
         Vector3 unitHorizontalVelocity = NearestUnit.Velocity.XZ();
-        Vector3 targetPosition = NearestUnit.transform.position.XZ() + unitHorizontalVelocity * realDuration
-            + Random.insideUnitSphere * 0.0f;
+        Vector3 targetPosition = NearestUnit.transform.position.XZ() + unitHorizontalVelocity * realDuration;
 
-        Vector3 toUnitDirection = (targetPosition - transform.position.XZ()).normalized;
+        Vector3 toUnitHorizontalDirection = (targetPosition - transform.position.XZ()).normalized;
+        Vector3 toUnitRealDirection = 
+            ((targetPosition + Vector3.up * 1f) - (transform.position.XZ() + _skin.RowSpawnPoint.position.Y())).normalized;
 
         _skin.ArcherAnimator.transform.rotation =
-            Quaternion.Slerp(_skin.ArcherAnimator.transform.rotation, Quaternion.LookRotation(toUnitDirection), Time.deltaTime * 9f);
+            Quaternion.Slerp(_skin.ArcherAnimator.transform.rotation, Quaternion.LookRotation(toUnitHorizontalDirection), 
+            Time.deltaTime * 9f);
         
         if (_lastShootTimer >= SHOOT_DELAY)
         {
             _lastShootTimer = 0f;
-            Shoot(toUnitDirection);
+            Shoot(toUnitRealDirection);
         }
     }
 

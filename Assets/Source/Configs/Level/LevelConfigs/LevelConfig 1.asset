@@ -15,11 +15,11 @@ MonoBehaviour:
   _attackIterations:
   - _parts:
     - UnitID: 0
-      Count: 2
-      SpawnInterval: 3
-      FinalDelay: 4
+      Count: 5
+      SpawnInterval: 0.5
+      FinalDelay: 1
   - _parts:
     - UnitID: 0
-      Count: 3
-      SpawnInterval: 4
+      Count: 1
+      SpawnInterval: 1
       FinalDelay: 0
